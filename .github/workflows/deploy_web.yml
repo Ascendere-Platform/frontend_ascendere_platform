@@ -39,7 +39,7 @@ jobs:
       with:
         publish-dir: './build/web'
         production-branch: main
-        github-token: ${{ secrets.TOKEN }}
+        github-token: ${{ secrets.TOKEN_GITHUB }}
         deploy-message: "Deploy from GitHub Actions"
         enable-pull-request-comment: false
         enable-commit-comment: true
