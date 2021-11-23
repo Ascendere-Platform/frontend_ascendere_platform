@@ -34,10 +34,6 @@ jobs:
     - run: flutter config --enable-web
     - run: flutter build -v web --release
 
-    - name: Create _redirects
-      run: |
-        cp _redirects ./build/web
-
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.1
       with:
