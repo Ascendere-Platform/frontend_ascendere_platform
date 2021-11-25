@@ -43,10 +43,11 @@ class Sidebar extends StatelessWidget {
           const SizedBox(height: 22),
           const TextSeparator(text: 'Convocatorias'),
           MenuItem(
-            // isActive: sideMenuProvider.currentPage == Flurorouter.modifyRoute,
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
             text: 'Nueva',
             icon: Icons.playlist_add,
-            onPressed: () {},
+            onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
           ),
           MenuItem(
             // isActive:
@@ -94,9 +95,11 @@ class Sidebar extends StatelessWidget {
           // const Spacer(),
           const TextSeparator(text: 'Administrador'),
           MenuItem(
-              text: 'Gestionar Usuarios',
-              icon: Icons.supervised_user_circle,
-              onPressed: () {}),
+            isActive: sideMenuProvider.currentPage == Flurorouter.usersRoute,
+            text: 'Gestionar Usuarios',
+            icon: Icons.supervised_user_circle,
+            onPressed: () => navigateTo(Flurorouter.usersRoute),
+          ),
         ],
       ),
     );

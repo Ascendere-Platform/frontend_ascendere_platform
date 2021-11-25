@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DashboardView extends StatefulWidget {
-  const DashboardView({Key? key}) : super(key: key);
+class ConvocatoriasView extends StatefulWidget {
+  const ConvocatoriasView({Key? key}) : super(key: key);
 
   @override
-  State<DashboardView> createState() => _DashboardViewState();
+  State<ConvocatoriasView> createState() => _ConvocatoriasViewState();
 }
 
-class _DashboardViewState extends State<DashboardView> {
+class _ConvocatoriasViewState extends State<ConvocatoriasView> {
   @override
   void initState() {
     super.initState();
@@ -23,7 +23,7 @@ class _DashboardViewState extends State<DashboardView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Panel de control',
+            'Convocatorias',
             style: GoogleFonts.quicksand(
                 fontSize: 24,
                 color: const Color(0xFF001B34),

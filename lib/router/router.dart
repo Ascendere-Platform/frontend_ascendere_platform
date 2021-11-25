@@ -16,6 +16,10 @@ class Flurorouter {
   // Dashboard
   static String dashboardRoute = '/dashboard';
 
+  static String convocatoriasRoute = '/dashboard/convocatorias';
+
+  static String usersRoute = '/dashboard/users';
+
   static void configureRoutes() {
     // Auth Routes
     router.define(rootRoute,
@@ -28,6 +32,12 @@ class Flurorouter {
     // Dashboard
     router.define(dashboardRoute,
         handler: DashboardHandlers.dashboard,
+        transitionType: TransitionType.fadeIn);
+    router.define(convocatoriasRoute,
+        handler: DashboardHandlers.convocatorias,
+        transitionType: TransitionType.fadeIn);
+    router.define(usersRoute,
+        handler: DashboardHandlers.users,
         transitionType: TransitionType.fadeIn);
 
     // No page Found

@@ -26,11 +26,7 @@ class _MenuItemState extends State<MenuItem> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
-      color: isHovered
-          ? Colors.white.withOpacity(0.1)
-          : widget.isActive
-              ? Colors.black
-              : Colors.transparent,
+      color: isHovered ? Colors.white.withOpacity(0.1) : Colors.transparent,
       child: Material(
         animationDuration: const Duration(milliseconds: 250),
         color: Colors.transparent,
@@ -47,7 +43,9 @@ class _MenuItemState extends State<MenuItem> {
                 children: [
                   Icon(
                     widget.icon,
-                    color: const Color(0xFF667685),
+                    color: widget.isActive
+                        ? const Color(0xFF00ACC1)
+                        : const Color(0xFF667685),
                     size: 18,
                   ),
                   const SizedBox(
@@ -57,7 +55,11 @@ class _MenuItemState extends State<MenuItem> {
                     widget.text,
                     style: GoogleFonts.quicksand(
                       fontSize: 14,
-                      color: const Color(0xFF667685),
+                      color: widget.isActive
+                          ? const Color(0xFF00ACC1)
+                          : const Color(0xFF667685),
+                      fontWeight:
+                          widget.isActive ? FontWeight.bold : FontWeight.normal,
                     ),
                   )
                 ],
