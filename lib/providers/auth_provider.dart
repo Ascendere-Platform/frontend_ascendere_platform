@@ -9,13 +9,11 @@ import 'package:frontend_ascendere_platform/services/navigation_service.dart';
 import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 
 import 'package:frontend_ascendere_platform/models/http/auth_response.dart';
-import 'package:frontend_ascendere_platform/models/user.dart';
 
 enum AuthStatus { checking, authenticated, notAuthenticated }
 
 class AuthProvider extends ChangeNotifier {
   AuthStatus authStatus = AuthStatus.checking;
-  User? user;
 
   AuthProvider() {
     isAuthenticated();
@@ -28,9 +26,10 @@ class AuthProvider extends ChangeNotifier {
       authStatus = AuthStatus.authenticated;
 
       final authResponse = AuthResponse.fromJson(resp);
-      LocalStorage.prefs.setString('token', authResponse.token);
-      NavigationService.replaceTo(Flurorouter.dashboardRoute);
 
+      LocalStorage.prefs.setString('token', authResponse.token);
+
+      NavigationService.replaceTo(Flurorouter.dashboardRoute);
       notifyListeners();
     }).catchError((e) {
       NotificationsService.showSnackbarError(

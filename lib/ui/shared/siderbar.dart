@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
-import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
+import 'package:provider/provider.dart';
+
 import 'package:frontend_ascendere_platform/router/router.dart';
+
+import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
+
 import 'package:frontend_ascendere_platform/services/navigation_service.dart';
-import 'package:frontend_ascendere_platform/ui/shared/widgets/logo.dart';
+
+import 'package:frontend_ascendere_platform/ui/shared/widgets/logo_ascendere.dart';
 import 'package:frontend_ascendere_platform/ui/shared/widgets/menu_item.dart';
 import 'package:frontend_ascendere_platform/ui/shared/widgets/text_separator.dart';
-import 'package:provider/provider.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({Key? key}) : super(key: key);
@@ -28,13 +31,13 @@ class Sidebar extends StatelessWidget {
       child: ListView(
         physics: const ClampingScrollPhysics(),
         children: [
-          const Logo(),
+          const AscendereLogo(),
           // const SizedBox(height: 50),
           MenuItem(
             isActive:
                 sideMenuProvider.currentPage == Flurorouter.dashboardRoute,
             text: 'Panel de control',
-            icon: Icons.compass_calibration_outlined,
+            icon: Icons.dashboard,
             onPressed: () => navigateTo(Flurorouter.dashboardRoute),
           ),
           const SizedBox(height: 22),
@@ -93,9 +96,7 @@ class Sidebar extends StatelessWidget {
           MenuItem(
               text: 'Gestionar Usuarios',
               icon: Icons.supervised_user_circle,
-              onPressed: () {
-                Provider.of<AuthProvider>(context, listen: false).logout();
-              }),
+              onPressed: () {}),
         ],
       ),
     );

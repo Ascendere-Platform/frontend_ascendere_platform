@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,7 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(lazy: false, create: (_) => AuthProvider()),
         ChangeNotifierProvider(lazy: false, create: (_) => SideMenuProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileProvider()),
       ],
       child: const MyApp(),
     );

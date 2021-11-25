@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 
+import 'package:frontend_ascendere_platform/ui/shared/navbar.dart';
 import 'package:frontend_ascendere_platform/ui/shared/siderbar.dart';
 
 class DashboardLayout extends StatefulWidget {
@@ -20,6 +23,7 @@ class _DashboardLayoutState extends State<DashboardLayout>
     super.initState();
     SideMenuProvider.menuController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300));
+    Provider.of<ProfileProvider>(context, listen: false).getProfile();
   }
 
   @override
@@ -38,13 +42,7 @@ class _DashboardLayoutState extends State<DashboardLayout>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //  NavBar(),
-                      if (size.width <= 700)
-                        IconButton(
-                          onPressed: () => SideMenuProvider.openMenu(),
-                          icon: const Icon(Icons.menu_outlined),
-                        ),
-
+                      const NavBar(),
                       // View
                       Expanded(
                         child: widget.child,

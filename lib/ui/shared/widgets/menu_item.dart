@@ -29,7 +29,7 @@ class _MenuItemState extends State<MenuItem> {
       color: isHovered
           ? Colors.white.withOpacity(0.1)
           : widget.isActive
-              ? Colors.white.withOpacity(0.1)
+              ? Colors.black
               : Colors.transparent,
       child: Material(
         animationDuration: const Duration(milliseconds: 250),
