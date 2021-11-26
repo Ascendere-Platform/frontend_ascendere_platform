@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
-import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:frontend_ascendere_platform/router/router.dart';
 
+import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
+import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
+import 'package:frontend_ascendere_platform/providers/users_provider.dart';
 import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
 
 import 'package:frontend_ascendere_platform/services/local_storage.dart';
@@ -32,6 +33,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(lazy: false, create: (_) => AuthProvider()),
         ChangeNotifierProvider(lazy: false, create: (_) => SideMenuProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => UsersProvider()),
       ],
       child: const MyApp(),
     );
