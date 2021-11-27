@@ -9,6 +9,10 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 class ProfileProvider extends ChangeNotifier {
   Profile? profile;
 
+  ProfileProvider() {
+    getProfile();
+  }
+
   getProfile() async {
     Map<String, dynamic> decodedToken =
         JwtDecoder.decode(LocalStorage.prefs.getString('token') ?? '');
@@ -17,7 +21,7 @@ class ProfileProvider extends ChangeNotifier {
     final resp = await MicroUsers.getProfile("/verperfil", user.id);
 
     profile = Profile.fromJson(resp);
-
+    
     notifyListeners();
   }
 }

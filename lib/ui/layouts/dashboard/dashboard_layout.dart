@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 
 import 'package:frontend_ascendere_platform/ui/shared/navbar.dart';
@@ -23,7 +21,6 @@ class _DashboardLayoutState extends State<DashboardLayout>
     super.initState();
     SideMenuProvider.menuController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300));
-    // Provider.of<ProfileProvider>(context, listen: false).getProfile();
   }
 
   @override
