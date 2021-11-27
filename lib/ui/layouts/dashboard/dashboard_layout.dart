@@ -23,7 +23,7 @@ class _DashboardLayoutState extends State<DashboardLayout>
     super.initState();
     SideMenuProvider.menuController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300));
-    Provider.of<ProfileProvider>(context, listen: false).getProfile();
+    // Provider.of<ProfileProvider>(context, listen: false).getProfile();
   }
 
   @override

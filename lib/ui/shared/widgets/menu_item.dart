@@ -51,15 +51,20 @@ class _MenuItemState extends State<MenuItem> {
                   const SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    widget.text,
-                    style: GoogleFonts.quicksand(
-                      fontSize: 14,
-                      color: widget.isActive
-                          ? const Color(0xFF00ACC1)
-                          : const Color(0xFF667685),
-                      fontWeight:
-                          widget.isActive ? FontWeight.bold : FontWeight.normal,
+                  Flexible(
+                    child: Text(
+                      widget.text,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.quicksand(
+                        fontSize: 14,
+                        color: widget.isActive
+                            ? const Color(0xFF00ACC1)
+                            : const Color(0xFF667685),
+                        fontWeight: widget.isActive
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
                     ),
                   )
                 ],
