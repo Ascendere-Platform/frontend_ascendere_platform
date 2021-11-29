@@ -32,7 +32,6 @@ class Sidebar extends StatelessWidget {
         physics: const ClampingScrollPhysics(),
         children: [
           const AscendereLogo(),
-          // const SizedBox(height: 50),
           MenuItem(
             isActive:
                 sideMenuProvider.currentPage == Flurorouter.dashboardRoute,
@@ -94,18 +93,6 @@ class Sidebar extends StatelessWidget {
             icon: Icons.sentiment_satisfied_alt,
             onPressed: () {},
           ),
-          // MenuItem(
-          //   // isActive: sideMenuProvider.currentPage == Flurorouter.iconsRoute,
-          //   text: 'Siguiendo',
-          //   icon: Icons.star,
-          //   onPressed: () {},
-          // ),
-          // MenuItem(
-          //   // isActive: sideMenuProvider.currentPage == Flurorouter.blankRoute,
-          //   text: 'Eliminados',
-          //   icon: Icons.folder_open,
-          //   onPressed: () {},
-          // ),
           const SizedBox(height: 50),
           // const Spacer(),
           const TextSeparator(text: 'Administrador'),

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:frontend_ascendere_platform/router/router.dart';
 
 import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
+import 'package:frontend_ascendere_platform/providers/options_avatar_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 import 'package:frontend_ascendere_platform/providers/users_provider.dart';
 import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
@@ -32,6 +33,8 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(lazy: false, create: (_) => AuthProvider()),
         ChangeNotifierProvider(lazy: false, create: (_) => SideMenuProvider()),
+        ChangeNotifierProvider(
+            lazy: false, create: (_) => OptionsAvatarProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(create: (_) => UsersProvider()),
       ],

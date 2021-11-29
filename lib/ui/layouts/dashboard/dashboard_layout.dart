@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:frontend_ascendere_platform/providers/options_avatar_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 
 import 'package:frontend_ascendere_platform/ui/shared/navbar.dart';
 import 'package:frontend_ascendere_platform/ui/shared/siderbar.dart';
+import 'package:frontend_ascendere_platform/ui/shared/widgets/options_avatar.dart';
 
 class DashboardLayout extends StatefulWidget {
   const DashboardLayout({Key? key, required this.child}) : super(key: key);
@@ -15,12 +17,14 @@ class DashboardLayout extends StatefulWidget {
 }
 
 class _DashboardLayoutState extends State<DashboardLayout>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
     SideMenuProvider.menuController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300));
+    OptionsAvatarProvider.menuController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 250));
   }
 
   @override
@@ -46,8 +50,38 @@ class _DashboardLayoutState extends State<DashboardLayout>
                       ),
                     ],
                   ),
-                )
+                ),
               ],
+            ),
+            AnimatedBuilder(
+              animation: OptionsAvatarProvider.menuController,
+              builder: (context, _) => Stack(
+                children: [
+                  if (OptionsAvatarProvider.isOpen)
+                    Opacity(
+                      opacity: OptionsAvatarProvider.opacity.value,
+                      child: GestureDetector(
+                        onHorizontalDragEnd: (DragEndDetails details) {
+                          if (details.primaryVelocity! > 0.0) {
+                            OptionsAvatarProvider.closeMenu();
+                          }
+                        },
+                        onTap: () => OptionsAvatarProvider.closeMenu(),
+                        child: Container(
+                          width: size.width,
+                          height: size.height,
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 100),
+                    right: OptionsAvatarProvider.isOpen ? 28.0 : -212.0,
+                    top: 72.0,
+                    child: const OptionsAvatar(),
+                  ),
+                ],
+              ),
             ),
             if (size.width < 700)
               AnimatedBuilder(
@@ -58,6 +92,11 @@ class _DashboardLayoutState extends State<DashboardLayout>
                       Opacity(
                         opacity: SideMenuProvider.opacity.value,
                         child: GestureDetector(
+                          onHorizontalDragEnd: (DragEndDetails details) {
+                            if (details.primaryVelocity! < 0.0) {
+                              SideMenuProvider.closeMenu();
+                            }
+                          },
                           onTap: () => SideMenuProvider.closeMenu(),
                           child: Container(
                             width: size.width,

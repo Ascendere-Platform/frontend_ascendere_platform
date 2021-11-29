@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
-
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 
 import 'package:frontend_ascendere_platform/ui/buttons/custom_icon_button.dart';

@@ -13,13 +13,11 @@ class CustomTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // SvgPicture.asset('assets/ascendere_logo.svg',
-          //     color: Colors.white, width: 50, height: 50),
           const SizedBox(height: 20),
           FittedBox(
             fit: BoxFit.contain,
             child: Text(
-              'Ascendere Platform',
+              'Plataforma Ascendere',
               style: GoogleFonts.quicksand(
                 fontSize: 40,
                 color: Colors.white,

@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MenuItem extends StatefulWidget {
-  const MenuItem({
+class MenuOption extends StatefulWidget {
+  const MenuOption({
     Key? key,
-    required this.icon,
     required this.text,
     required this.onPressed,
-    this.isActive = false,
   }) : super(key: key);
 
   final String text;
-  final IconData icon;
-  final bool isActive;
   final Function onPressed;
 
   @override
-  State<MenuItem> createState() => _MenuItemState();
+  State<MenuOption> createState() => _MenuOptionState();
 }
 
-class _MenuItemState extends State<MenuItem> {
+class _MenuOptionState extends State<MenuOption> {
   bool isHovered = false;
 
   @override
@@ -31,7 +27,7 @@ class _MenuItemState extends State<MenuItem> {
         animationDuration: const Duration(milliseconds: 250),
         color: Colors.transparent,
         child: InkWell(
-          onTap: widget.isActive ? null : () => widget.onPressed(),
+          onTap: () => widget.onPressed(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
             child: MouseRegion(
@@ -40,16 +36,6 @@ class _MenuItemState extends State<MenuItem> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    widget.icon,
-                    color: widget.isActive
-                        ? const Color(0xFF00ACC1)
-                        : const Color(0xFF667685),
-                    size: 18,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
                   Flexible(
                     child: Text(
                       widget.text,
@@ -57,12 +43,8 @@ class _MenuItemState extends State<MenuItem> {
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.quicksand(
                         fontSize: 14,
-                        color: widget.isActive
-                            ? const Color(0xFF00ACC1)
-                            : const Color(0xFF667685),
-                        fontWeight: widget.isActive
-                            ? FontWeight.bold
-                            : FontWeight.normal,
+                        color: const Color(0xFF667685),
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   )

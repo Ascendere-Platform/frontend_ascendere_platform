@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:frontend_ascendere_platform/providers/options_avatar_provider.dart';
 import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
 
 class AvatarIcon extends StatelessWidget {
@@ -30,7 +31,9 @@ class AvatarIcon extends StatelessWidget {
       borderRadius: const BorderRadius.all(Radius.circular(4)),
       elevation: 3,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          OptionsAvatarProvider.openMenu();
+        },
         child: SizedBox(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4),
