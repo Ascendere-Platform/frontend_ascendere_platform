@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -47,11 +46,11 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(30),
-      child: ListView(
-        children: [
-          Column(
+    return ListView(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(30),
+          child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -161,8 +160,8 @@ class _DashboardViewState extends State<DashboardView> {
               )
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -179,7 +178,8 @@ class _DashboardViewState extends State<DashboardView> {
 
 List<PieSeries<ChartSampleData, String>> _getDefaultPieSeries() {
   final List<ChartSampleData> pieData = <ChartSampleData>[
-    ChartSampleData(x: 'Buenas Practicas', y: 13, text: 'Buenas Practicas \n 13%'),
+    ChartSampleData(
+        x: 'Buenas Practicas', y: 13, text: 'Buenas Practicas \n 13%'),
     ChartSampleData(x: 'Triadas', y: 24, text: 'Triadas \n 24%'),
     ChartSampleData(x: 'Innovación', y: 25, text: 'Innovación \n 25%'),
     ChartSampleData(x: 'Retos', y: 38, text: 'Retos \n 38%'),

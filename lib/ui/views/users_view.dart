@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_ascendere_platform/datatables/test.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,19 +26,27 @@ class _UsersViewState extends State<UsersView> {
 
     final usersDataSource = UsersDataSource(usersProvider.users);
 
-    return Container(
-      padding: const EdgeInsets.all(30),
-      child: ListView(
-        children: [
-          Text(
-            'Usuarios',
-            style: GoogleFonts.quicksand(
-                fontSize: 24,
-                color: const Color(0xFF001B34),
-                fontWeight: FontWeight.bold),
+    return ListView(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Usuarios',
+                style: GoogleFonts.quicksand(
+                    fontSize: 24,
+                    color: const Color(0xFF001B34),
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 24),
+            ],
           ),
-          const SizedBox(height: 24),
-          PaginatedDataTable(
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: PaginatedDataTable(
             sortAscending: usersProvider.ascending,
             sortColumnIndex: usersProvider.sortColumnIndex,
             columns: [
@@ -58,9 +67,9 @@ class _UsersViewState extends State<UsersView> {
             ],
             source: usersDataSource,
             onPageChanged: (page) {},
-          )
-        ],
-      ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -33,7 +33,7 @@ class _DashboardLayoutState extends State<DashboardLayout>
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xffEDF1F2),
+        backgroundColor: const Color(0xffF9F9FB),
         body: Stack(
           children: [
             Row(

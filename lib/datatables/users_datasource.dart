@@ -13,7 +13,7 @@ class UsersDataSource extends DataTableSource {
 
     return DataRow.byIndex(
       index: index,
-      cells: [
+      cells: <DataCell>[
         DataCell(Text(user.nombre)),
         DataCell(Text(user.email)),
         DataCell(Text(user.id)),

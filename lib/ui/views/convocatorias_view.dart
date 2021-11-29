@@ -16,30 +16,28 @@ class _ConvocatoriasViewState extends State<ConvocatoriasView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(30),
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Convocatorias',
-            style: GoogleFonts.quicksand(
-                fontSize: 24,
-                color: const Color(0xFF001B34),
-                fontWeight: FontWeight.bold),
+    return ListView(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Crear Convocatoria',
+                style: GoogleFonts.quicksand(
+                    fontSize: 24,
+                    color: const Color(0xFF001B34),
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 0),
+              const SizedBox(height: 50),
+              
+            ],
           ),
-          const SizedBox(height: 0),
-          Text(
-            'Hola, bienvenido!',
-            style: GoogleFonts.quicksand(
-                fontSize: 14,
-                color: const Color(0xFF001B34),
-                fontWeight: FontWeight.normal),
-          ),
-          const SizedBox(height: 50),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

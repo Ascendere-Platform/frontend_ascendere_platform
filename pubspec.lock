@@ -463,7 +463,7 @@ packages:
     source: hosted
     version: "19.3.55"
   syncfusion_flutter_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"

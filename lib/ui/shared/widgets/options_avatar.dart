@@ -55,7 +55,7 @@ class OptionsAvatar extends StatelessWidget {
           MenuItem(
             text: profileTemp.email,
             icon: Icons.email,
-            onPressed: () => navigateTo(Flurorouter.dashboardRoute),
+            onPressed: () {},
           ),
           const SizedBox(height: 22),
           const TextSeparator(text: 'Acciones'),
