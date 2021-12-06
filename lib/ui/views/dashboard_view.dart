@@ -14,6 +14,7 @@ class DashboardView extends StatefulWidget {
 
 class _DashboardViewState extends State<DashboardView> {
   late List<LiveData> chartData;
+  // ignore: unused_field
   late ChartSeriesController _chartSeriesController;
   var rng = Random();
 
