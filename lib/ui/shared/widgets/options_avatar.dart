@@ -29,13 +29,13 @@ class OptionsAvatar extends StatelessWidget {
 
     final profileTemp = (profile == null)
         ? Profile(
-            rolid: "",
+            rol: Rol(id: "", nombreRol: "user"),
             nombre: "nombre",
-            apellidos: "apellido",
             id: "",
             fechaNacimiento: DateTime.parse("1969-07-20 20:18:04Z"),
             email: "email",
-            avatar: "avatar")
+            avatar: "avatar",
+          )
         : profile;
 
     return Container(
@@ -47,9 +47,7 @@ class OptionsAvatar extends StatelessWidget {
         physics: const ClampingScrollPhysics(),
         children: [
           const TextSeparator(text: 'Datos del usuario'),
-          MenuOption(
-              text: profileTemp.nombre + ' ' + profileTemp.apellidos,
-              onPressed: () {}),
+          MenuOption(text: profileTemp.nombre, onPressed: () {}),
           MenuItem(
             text: profileTemp.email,
             icon: Icons.email,

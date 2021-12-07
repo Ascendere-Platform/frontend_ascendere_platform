@@ -2,44 +2,66 @@ import 'dart:convert';
 
 class Profile {
   Profile({
-    required this.rolid,
-    required this.nombre,
-    required this.apellidos,
     required this.id,
+    required this.rol,
+    required this.nombre,
     required this.fechaNacimiento,
     required this.email,
     required this.avatar,
   });
 
   String id;
-  String rolid;
+  Rol rol;
   String nombre;
-  String apellidos;
   DateTime fechaNacimiento;
   String email;
   String avatar;
 
-  factory Profile.fromJson(String str) => Profile.fromMap(json.decode(str));
+  factory Profile.fromJson(String str) =>
+      Profile.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Profile.fromMap(Map<String, dynamic> json) => Profile(
+  factory Profile.fromMap(Map<String, dynamic> json) =>
+      Profile(
         id: json["id"],
-        rolid: json["rolid"],
+        rol: Rol.fromMap(json["rol"]),
         nombre: json["nombre"],
-        apellidos: json["apellidos"],
         fechaNacimiento: DateTime.parse(json["fechaNacimiento"]),
         email: json["email"],
-        avatar: json["avatar"],
+        avatar: json["avatar"] ?? '',
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "rolid": rolid,
+        "rol": rol.toMap(),
         "nombre": nombre,
-        "apellidos": apellidos,
         "fechaNacimiento": fechaNacimiento.toIso8601String(),
         "email": email,
         "avatar": avatar,
+      };
+}
+
+class Rol {
+  Rol({
+    required this.id,
+    required this.nombreRol,
+  });
+
+  String id;
+  String nombreRol;
+
+  factory Rol.fromJson(String str) => Rol.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Rol.fromMap(Map<String, dynamic> json) => Rol(
+        id: json["id"],
+        nombreRol: json["nombreRol"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "nombreRol": nombreRol,
       };
 }

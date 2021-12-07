@@ -3,11 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:frontend_ascendere_platform/api/micro_users.dart';
-
-import 'package:frontend_ascendere_platform/models/http/user_response.dart';
+import 'package:frontend_ascendere_platform/models/http/profile.dart';
 
 class UsersProvider extends ChangeNotifier {
-  List<UserResponse> users = [];
+  List<Profile> users = [];
   bool isLoading = true;
   bool ascending = true;
   int? sortColumnIndex;
@@ -21,7 +20,7 @@ class UsersProvider extends ChangeNotifier {
     List<dynamic> list = json.decode(resp);
 
     for (var user in list) {
-      users.add(UserResponse.fromMap(user));
+      users.add(Profile.fromMap(user));
     }
 
     isLoading = false;
@@ -29,7 +28,7 @@ class UsersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void sort<T>(Comparable<T> Function(UserResponse user) getField) {
+  void sort<T>(Comparable<T> Function(Profile user) getField) {
     users.sort((a, b) {
       final aValue = getField(a);
       final bValue = getField(b);
@@ -44,7 +43,7 @@ class UsersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void refresUser(UserResponse newUser) {
+  void refresUser(Profile newUser) {
     users = users.map((user) {
       if (user.id != newUser.id) return user;
       user = newUser;

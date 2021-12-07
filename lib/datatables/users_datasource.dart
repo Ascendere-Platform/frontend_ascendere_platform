@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:frontend_ascendere_platform/models/http/user_response.dart';
+import 'package:frontend_ascendere_platform/models/http/profile.dart';
 
 class UsersDataSource extends DataTableSource {
-  final List<UserResponse> users;
+  final List<Profile> users;
 
   UsersDataSource(this.users);
 

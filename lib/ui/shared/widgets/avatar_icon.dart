@@ -21,11 +21,17 @@ class AvatarIcon extends StatelessWidget {
             width: 40,
             height: 40,
           )
-        : FadeInImage.assetNetwork(
-            placeholder: 'assets/avatar_temp.png',
-            image: profile.avatar,
-            fit: BoxFit.cover,
-          );
+        : (profile.avatar == '')
+            ? const Image(
+                image: AssetImage('assets/avatar_temp.png'),
+                width: 40,
+                height: 40,
+              )
+            : FadeInImage.assetNetwork(
+                placeholder: 'assets/avatar_temp.png',
+                image: profile.avatar,
+                fit: BoxFit.cover,
+              );
 
     return Material(
       borderRadius: const BorderRadius.all(Radius.circular(4)),
