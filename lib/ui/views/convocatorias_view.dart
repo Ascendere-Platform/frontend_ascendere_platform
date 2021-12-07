@@ -13,7 +13,10 @@ import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_
 
 import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard_action.dart';
 import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard.dart';
+
 import 'package:frontend_ascendere_platform/ui/inputs/custom_inputs.dart';
+
+import 'package:frontend_ascendere_platform/ui/modals/strategic_lines_modal.dart';
 import 'package:frontend_ascendere_platform/ui/modals/annexes_modal.dart';
 
 import 'package:frontend_ascendere_platform/models/http/resource_response.dart';
@@ -151,7 +154,8 @@ class _ConvocatoriasViewState extends State<ConvocatoriasView> {
 
                 const SizedBox(height: 30),
                 // Stratic Lines
-                CardDashboard(
+                CardDashboardAction(
+                  onPressed: () => const StrategicLinesModal(),
                   title: 'Líneas estratégicas',
                   child: Column(
                     children: [

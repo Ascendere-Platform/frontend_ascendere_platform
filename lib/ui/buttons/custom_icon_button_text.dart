@@ -6,7 +6,7 @@ class CustomIconButtonText extends StatelessWidget {
     required this.onPressed,
     required this.text,
     required this.icon,
-    this.color = Colors.indigo,
+    this.color = Colors.cyan,
     this.isFilled = false,
   }) : super(key: key);
 
@@ -18,10 +18,10 @@ class CustomIconButtonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
+    return ElevatedButton(
       style: ButtonStyle(
-          shape: MaterialStateProperty.all(const StadiumBorder()),
-          backgroundColor: MaterialStateProperty.all(color.withOpacity(0.5))),
+          // shape: MaterialStateProperty.all(const StadiumBorder()),
+          backgroundColor: MaterialStateProperty.all(color)),
       onPressed: () => onPressed(),
       child: Row(
         children: [

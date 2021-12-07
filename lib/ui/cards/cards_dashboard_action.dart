@@ -56,7 +56,7 @@ class CardDashboardAction extends StatelessWidget {
                     );
                   },
                   icon: Icons.add_outlined,
-                  text: 'Crear',
+                  text: 'Nuevo',
                 ),
               ],
             ),

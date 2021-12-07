@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:frontend_ascendere_platform/providers/convocatoria/annexes_form_provider.dart';
+import 'package:frontend_ascendere_platform/providers/convocatoria/strategic_lines_form_provider.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
 
 import 'package:frontend_ascendere_platform/services/notifications_service.dart';
@@ -12,23 +12,23 @@ import 'package:frontend_ascendere_platform/ui/buttons/custom_outlined_button.da
 import 'package:frontend_ascendere_platform/ui/inputs/custom_inputs.dart';
 import 'package:frontend_ascendere_platform/ui/labels/custom_labels.dart';
 
-class AnnexesModal extends StatefulWidget {
-  const AnnexesModal({Key? key, this.annexes}) : super(key: key);
+class StrategicLinesModal extends StatefulWidget {
+  const StrategicLinesModal({Key? key, this.strategicLine}) : super(key: key);
 
-  final AnexosConvocatoria? annexes;
+  final LineasEstrategica? strategicLine;
 
   @override
-  State<AnnexesModal> createState() => _AnnexesModalState();
+  State<StrategicLinesModal> createState() => _StrategicLinesModalState();
 }
 
-class _AnnexesModalState extends State<AnnexesModal> {
+class _StrategicLinesModalState extends State<StrategicLinesModal> {
   @override
   Widget build(BuildContext context) {
     final convocatoriaProvider =
         Provider.of<ConvocatoriaProvider>(context, listen: false);
 
-    final annexesProvider =
-        Provider.of<AnnexesFormProvider>(context, listen: false);
+    final strategicLinesProvider =
+        Provider.of<StrategicLinesFormProvider>(context, listen: false);
 
     return ListView(
       children: [
@@ -38,14 +38,14 @@ class _AnnexesModalState extends State<AnnexesModal> {
           width: 300,
           decoration: buildBoxDecoration(),
           child: Form(
-            key: annexesProvider.formKey,
+            key: strategicLinesProvider.formKey,
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Nuevo Anexo',
+                      'Nueva Linea Estratégica',
                       style: CustomLabels.h2.copyWith(color: Colors.white),
                     ),
                     IconButton(
@@ -63,14 +63,14 @@ class _AnnexesModalState extends State<AnnexesModal> {
                 const SizedBox(height: 20),
                 TextFormField(
                   // initialValue: widget.categoria?.nombre ?? '',
-                  onChanged: (value) => annexesProvider.name = value,
+                  onChanged: (value) => strategicLinesProvider.name = value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Ingrese el nombre del anexo';
+                      return 'Ingrese el nombre de la linea estratégica';
                     }
                   },
                   decoration: CustomInputs.loginInputDecoration(
-                    hint: 'Nombre del Anexo',
+                    hint: 'Nombre de la Linea Estratégica',
                     label: 'Nombre',
                     icon: Icons.new_releases_outlined,
                   ),
@@ -78,15 +78,16 @@ class _AnnexesModalState extends State<AnnexesModal> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  onChanged: (value) => annexesProvider.link = value,
+                  onChanged: (value) =>
+                      strategicLinesProvider.description = value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Ingrese el link del anexo';
+                      return 'Ingrese la descripción de la linea estratégica';
                     }
                   },
                   decoration: CustomInputs.loginInputDecoration(
-                    hint: 'Link del Anexo',
-                    label: 'Link',
+                    hint: 'Descripción de la Linea Estratégica',
+                    label: 'Descripción',
                     icon: Icons.new_releases_outlined,
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -96,19 +97,20 @@ class _AnnexesModalState extends State<AnnexesModal> {
                   alignment: Alignment.center,
                   child: CustomOutlinedButton(
                     onPressed: () async {
-                      final validForm = annexesProvider.validateForm();
+                      final validForm = strategicLinesProvider.validateForm();
                       if (!validForm) return;
 
                       try {
                         await convocatoriaProvider.registerAnnexe(
-                            annexesProvider.name, annexesProvider.link);
+                            strategicLinesProvider.name,
+                            strategicLinesProvider.description);
                         NotificationsService.showSnackbar(
-                            'Anexo : ${annexesProvider.name} creado');
+                            'Linea Estratégica : ${strategicLinesProvider.name} creado');
                         Navigator.of(context).pop();
                       } catch (e) {
                         Navigator.of(context).pop();
                         NotificationsService.showSnackbarError(
-                            'No se pudo crear el anexo');
+                            'No se pudo crear la linea estratégica');
                       }
                     },
                     text: 'Guardar',

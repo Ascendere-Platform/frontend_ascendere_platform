@@ -11,6 +11,7 @@ import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
 import 'package:frontend_ascendere_platform/providers/resources_provider.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/annexes_form_provider.dart';
+import 'package:frontend_ascendere_platform/providers/convocatoria/strategic_lines_form_provider.dart';
 
 import 'package:frontend_ascendere_platform/services/local_storage.dart';
 import 'package:frontend_ascendere_platform/services/navigation_service.dart';
@@ -43,6 +44,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ResourcesProvider()),
         ChangeNotifierProvider(create: (_) => ConvocatoriaProvider()),
         ChangeNotifierProvider(create: (_) => AnnexesFormProvider()),
+        ChangeNotifierProvider(create: (_) => StrategicLinesFormProvider()),
       ],
       child: const MyApp(),
     );
