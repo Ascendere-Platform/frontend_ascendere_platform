@@ -126,7 +126,7 @@ class _AnnexesModalState extends State<AnnexesModal> {
   BoxDecoration buildBoxDecoration() => const BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-          color: Color(0xff0f2041),
+          color: Color(0xff222E50),
           boxShadow: [
             BoxShadow(color: Colors.black26),
           ]);

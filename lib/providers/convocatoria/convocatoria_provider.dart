@@ -113,7 +113,7 @@ class ConvocatoriaProvider extends ChangeNotifier {
     final data = {"nombreAnexo": nameAnnexe, "link": linkAnnexe};
 
     try {
-      final resp = await MicroConvocatorias.post('/registrarAnexo', data);
+      await MicroConvocatorias.post('/registrarAnexo', data);
       getAnexos();
 
       notifyListeners();
@@ -125,6 +125,7 @@ class ConvocatoriaProvider extends ChangeNotifier {
   getLines() async {
     final resp = await MicroConvocatorias.get('/listarLineas');
     List<dynamic> list = json.decode(resp);
+    strategicLines.clear();
 
     for (var line in list) {
       strategicLines.add(LineasEstrategica.fromMap(line));
@@ -135,9 +136,23 @@ class ConvocatoriaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  registerLines(String nameAnnexe, String linkAnnexe) async {
+    final data = {"nombreLinea": nameAnnexe, "descripcionLinea": linkAnnexe};
+
+    try {
+      await MicroConvocatorias.post('/registrarLinea', data);
+      getLines();
+
+      notifyListeners();
+    } catch (e) {
+      throw 'Error al crear categoria';
+    }
+  }
+
   getExpectedResults() async {
     final resp = await MicroConvocatorias.get('/listarResultadosEsperados');
     List<dynamic> list = json.decode(resp);
+    expectedResults.clear();
 
     for (var expectedResult in list) {
       expectedResults.add(ResultadosEsperado.fromMap(expectedResult));
@@ -146,6 +161,24 @@ class ConvocatoriaProvider extends ChangeNotifier {
     isLoading = false;
 
     notifyListeners();
+  }
+
+  registerExpectedResult(
+      String nameAnnexe, String linkAnnexe, double score) async {
+    final data = {
+      "nombreResultado": nameAnnexe,
+      "descripcionResultado": linkAnnexe,
+      "puntajeResultado": score
+    };
+
+    try {
+      await MicroConvocatorias.post('/registrarResultadoEsperado', data);
+      getExpectedResults();
+
+      notifyListeners();
+    } catch (e) {
+      throw 'Error al crear categoria';
+    }
   }
 
   getRubrics() async {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'package:frontend_ascendere_platform/providers/convocatoria/strategic_lines_form_provider.dart';
+import 'package:frontend_ascendere_platform/providers/convocatoria/expected_result_form.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
 
 import 'package:frontend_ascendere_platform/services/notifications_service.dart';
@@ -12,23 +13,23 @@ import 'package:frontend_ascendere_platform/ui/buttons/custom_outlined_button.da
 import 'package:frontend_ascendere_platform/ui/inputs/custom_inputs.dart';
 import 'package:frontend_ascendere_platform/ui/labels/custom_labels.dart';
 
-class StrategicLinesModal extends StatefulWidget {
-  const StrategicLinesModal({Key? key, this.strategicLine}) : super(key: key);
+class ExpectedResultModal extends StatefulWidget {
+  const ExpectedResultModal({Key? key, this.expectedResult}) : super(key: key);
 
-  final LineasEstrategica? strategicLine;
+  final ResultadosEsperado? expectedResult;
 
   @override
-  State<StrategicLinesModal> createState() => _StrategicLinesModalState();
+  State<ExpectedResultModal> createState() => _ExpectedResultModalState();
 }
 
-class _StrategicLinesModalState extends State<StrategicLinesModal> {
+class _ExpectedResultModalState extends State<ExpectedResultModal> {
   @override
   Widget build(BuildContext context) {
     final convocatoriaProvider =
         Provider.of<ConvocatoriaProvider>(context, listen: false);
 
-    final strategicLinesProvider =
-        Provider.of<StrategicLinesFormProvider>(context, listen: false);
+    final expectedResultProvider =
+        Provider.of<ExpectedResultFormProvider>(context, listen: false);
 
     return ListView(
       children: [
@@ -38,14 +39,14 @@ class _StrategicLinesModalState extends State<StrategicLinesModal> {
           width: 300,
           decoration: buildBoxDecoration(),
           child: Form(
-            key: strategicLinesProvider.formKey,
+            key: expectedResultProvider.formKey,
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Nueva Linea Estratégica',
+                      'Nuevo Resultado Esperado',
                       style: CustomLabels.h2.copyWith(color: Colors.white),
                     ),
                     IconButton(
@@ -63,14 +64,14 @@ class _StrategicLinesModalState extends State<StrategicLinesModal> {
                 const SizedBox(height: 20),
                 TextFormField(
                   // initialValue: widget.categoria?.nombre ?? '',
-                  onChanged: (value) => strategicLinesProvider.name = value,
+                  onChanged: (value) => expectedResultProvider.name = value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Ingrese el nombre de la linea estratégica';
+                      return 'Ingrese el nombre del resultado';
                     }
                   },
                   decoration: CustomInputs.loginInputDecoration(
-                    hint: 'Nombre de la Linea Estratégica',
+                    hint: 'Nombre de la Resultado',
                     label: 'Nombre',
                     icon: Icons.new_releases_outlined,
                   ),
@@ -79,15 +80,36 @@ class _StrategicLinesModalState extends State<StrategicLinesModal> {
                 const SizedBox(height: 20),
                 TextFormField(
                   onChanged: (value) =>
-                      strategicLinesProvider.description = value,
+                      expectedResultProvider.description = value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Ingrese la descripción de la linea estratégica';
+                      return 'Ingrese la descripción del resultado';
                     }
                   },
                   decoration: CustomInputs.loginInputDecoration(
-                    hint: 'Descripción de la Linea Estratégica',
+                    hint: 'Descripción del resultado',
                     label: 'Descripción',
+                    icon: Icons.new_releases_outlined,
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')),
+                  ],
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  onChanged: (value) =>
+                      expectedResultProvider.score = double.parse(value),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Ingrese el puntaje minimo del resultado';
+                    }
+                  },
+                  decoration: CustomInputs.loginInputDecoration(
+                    hint: 'Puntaje minimo del resultado',
+                    label: 'Puntaje',
                     icon: Icons.new_releases_outlined,
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -97,20 +119,22 @@ class _StrategicLinesModalState extends State<StrategicLinesModal> {
                   alignment: Alignment.center,
                   child: CustomOutlinedButton(
                     onPressed: () async {
-                      final validForm = strategicLinesProvider.validateForm();
+                      final validForm = expectedResultProvider.validateForm();
                       if (!validForm) return;
 
                       try {
-                        await convocatoriaProvider.registerLines(
-                            strategicLinesProvider.name,
-                            strategicLinesProvider.description);
+                        await convocatoriaProvider.registerExpectedResult(
+                          expectedResultProvider.name,
+                          expectedResultProvider.description,
+                          expectedResultProvider.score,
+                        );
                         NotificationsService.showSnackbar(
-                            'Linea Estratégica : ${strategicLinesProvider.name} creado');
+                            'Resultado : ${expectedResultProvider.name} creado');
                         Navigator.of(context).pop();
                       } catch (e) {
                         Navigator.of(context).pop();
                         NotificationsService.showSnackbarError(
-                            'No se pudo crear la linea estratégica');
+                            'No se pudo crear el resultado esperado');
                       }
                     },
                     text: 'Guardar',
