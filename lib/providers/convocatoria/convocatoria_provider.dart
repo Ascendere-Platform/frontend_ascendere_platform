@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:frontend_ascendere_platform/api/micro_convocatorias.dart';
@@ -85,6 +86,7 @@ class ConvocatoriaProvider extends ChangeNotifier {
   getTypes() async {
     final resp = await MicroConvocatorias.get('/listarTiposProyectos');
     List<dynamic> list = json.decode(resp);
+    typesProjets.clear();
 
     for (var typeProject in list) {
       typesProjets.add(TiposProyecto.fromMap(typeProject));
@@ -93,6 +95,24 @@ class ConvocatoriaProvider extends ChangeNotifier {
     isLoading = false;
 
     notifyListeners();
+  }
+
+  registerTypeProject(
+      String nameAnnexe, String linkAnnexe, double score) async {
+    final data = {
+      "tipoProyecto": nameAnnexe,
+      "descripcionTipo": linkAnnexe,
+      "presupuesto": score
+    };
+
+    try {
+      await MicroConvocatorias.post('/registrarTipoProyecto', data);
+      getTypes();
+
+      notifyListeners();
+    } catch (e) {
+      throw 'Error al crear categoria';
+    }
   }
 
   getAnexos() async {

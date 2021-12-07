@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:frontend_ascendere_platform/providers/convocatoria/rubric_form.dart';
 import 'package:provider/provider.dart';
 
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
+import 'package:frontend_ascendere_platform/providers/convocatoria/types_project_form_provider.dart';
 
 import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 
@@ -13,23 +13,23 @@ import 'package:frontend_ascendere_platform/ui/buttons/custom_outlined_button.da
 import 'package:frontend_ascendere_platform/ui/inputs/custom_inputs.dart';
 import 'package:frontend_ascendere_platform/ui/labels/custom_labels.dart';
 
-class RubricModal extends StatefulWidget {
-  const RubricModal({Key? key, this.rubric}) : super(key: key);
+class TypeProjectModal extends StatefulWidget {
+  const TypeProjectModal({Key? key, this.rubric}) : super(key: key);
 
   final RubricasConvocatoria? rubric;
 
   @override
-  State<RubricModal> createState() => _RubricModalState();
+  State<TypeProjectModal> createState() => _TypeProjectModalState();
 }
 
-class _RubricModalState extends State<RubricModal> {
+class _TypeProjectModalState extends State<TypeProjectModal> {
   @override
   Widget build(BuildContext context) {
     final convocatoriaProvider =
         Provider.of<ConvocatoriaProvider>(context, listen: false);
 
-    final rubricProvider =
-        Provider.of<RubricFormProvider>(context, listen: false);
+    final typeProjectProvider =
+        Provider.of<TypesProjectFormProvider>(context, listen: false);
 
     return ListView(
       children: [
@@ -39,14 +39,14 @@ class _RubricModalState extends State<RubricModal> {
           width: 300,
           decoration: buildBoxDecoration(),
           child: Form(
-            key: rubricProvider.formKey,
+            key: typeProjectProvider.formKey,
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Nueva Rúbrica',
+                      'Nuevo Tipo de Proyecto',
                       style: CustomLabels.h2.copyWith(color: Colors.white),
                     ),
                     IconButton(
@@ -63,14 +63,14 @@ class _RubricModalState extends State<RubricModal> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  onChanged: (value) => rubricProvider.name = value,
+                  onChanged: (value) => typeProjectProvider.name = value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Ingrese el nombre de la rúbrica';
+                      return 'Ingrese el nombre del proyecto';
                     }
                   },
                   decoration: CustomInputs.loginInputDecoration(
-                    hint: 'Nombre de la Rúbrica',
+                    hint: 'Nombre deL Proyecto',
                     label: 'Nombre',
                     icon: Icons.new_releases_outlined,
                   ),
@@ -78,14 +78,14 @@ class _RubricModalState extends State<RubricModal> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  onChanged: (value) => rubricProvider.description = value,
+                  onChanged: (value) => typeProjectProvider.description = value,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Ingrese la descripción de la Rúbrica';
+                      return 'Ingrese la descripción del proyecto';
                     }
                   },
                   decoration: CustomInputs.loginInputDecoration(
-                    hint: 'Descripción de la Rúbrica',
+                    hint: 'Descripción del Proyecto',
                     label: 'Descripción',
                     icon: Icons.new_releases_outlined,
                   ),
@@ -99,15 +99,15 @@ class _RubricModalState extends State<RubricModal> {
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
                   onChanged: (value) =>
-                      rubricProvider.score = double.parse(value),
+                      typeProjectProvider.budget = double.parse(value),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Ingrese el puntaje minimo de la rúbrica';
+                      return 'Ingrese el presupuesto del proyecto';
                     }
                   },
                   decoration: CustomInputs.loginInputDecoration(
-                    hint: 'Puntaje minimo de la Rúbrica',
-                    label: 'Puntaje',
+                    hint: 'Presupuesto del Proyecto',
+                    label: 'Presupuesto',
                     icon: Icons.new_releases_outlined,
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -117,22 +117,22 @@ class _RubricModalState extends State<RubricModal> {
                   alignment: Alignment.center,
                   child: CustomOutlinedButton(
                     onPressed: () async {
-                      final validForm = rubricProvider.validateForm();
+                      final validForm = typeProjectProvider.validateForm();
                       if (!validForm) return;
 
                       try {
-                        await convocatoriaProvider.registerRubric(
-                          rubricProvider.name,
-                          rubricProvider.description,
-                          rubricProvider.score,
+                        await convocatoriaProvider.registerTypeProject(
+                          typeProjectProvider.name,
+                          typeProjectProvider.description,
+                          typeProjectProvider.budget,
                         );
                         NotificationsService.showSnackbar(
-                            'Rúbrica : ${rubricProvider.name} creado');
+                            'Tipo de proyecto : ${typeProjectProvider.name} creado');
                         Navigator.of(context).pop();
                       } catch (e) {
                         Navigator.of(context).pop();
                         NotificationsService.showSnackbarError(
-                            'No se pudo crear la rúbrica');
+                            'No se pudo crear el tipo de proyecto');
                       }
                     },
                     text: 'Guardar',

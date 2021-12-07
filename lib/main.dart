@@ -14,6 +14,7 @@ import 'package:frontend_ascendere_platform/providers/convocatoria/annexes_form_
 import 'package:frontend_ascendere_platform/providers/convocatoria/strategic_lines_form_provider.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/expected_result_form.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/rubric_form.dart';
+import 'package:frontend_ascendere_platform/providers/convocatoria/types_project_form_provider.dart';
 
 import 'package:frontend_ascendere_platform/services/local_storage.dart';
 import 'package:frontend_ascendere_platform/services/navigation_service.dart';
@@ -49,6 +50,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => StrategicLinesFormProvider()),
         ChangeNotifierProvider(create: (_) => ExpectedResultFormProvider()),
         ChangeNotifierProvider(create: (_) => RubricFormProvider()),
+        ChangeNotifierProvider(create: (_) => TypesProjectFormProvider()),
       ],
       child: const MyApp(),
     );
