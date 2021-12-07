@@ -184,6 +184,7 @@ class ConvocatoriaProvider extends ChangeNotifier {
   getRubrics() async {
     final resp = await MicroConvocatorias.get('/listarRubricas');
     List<dynamic> list = json.decode(resp);
+    rubrics.clear();
 
     for (var rubric in list) {
       rubrics.add(RubricasConvocatoria.fromMap(rubric));
@@ -192,6 +193,23 @@ class ConvocatoriaProvider extends ChangeNotifier {
     isLoading = false;
 
     notifyListeners();
+  }
+
+  registerRubric(String nameAnnexe, String linkAnnexe, double score) async {
+    final data = {
+      "nombreRubrica": nameAnnexe,
+      "descripcionRubrica": linkAnnexe,
+      "puntajeRubrica": score
+    };
+
+    try {
+      await MicroConvocatorias.post('/registrarRubrica', data);
+      getRubrics();
+
+      notifyListeners();
+    } catch (e) {
+      throw 'Error al crear categoria';
+    }
   }
 
   bool validateForm() {

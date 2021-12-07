@@ -16,6 +16,7 @@ import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard.dart';
 
 import 'package:frontend_ascendere_platform/ui/inputs/custom_inputs.dart';
 
+import 'package:frontend_ascendere_platform/ui/modals/rubric_modal.dart';
 import 'package:frontend_ascendere_platform/ui/modals/expected_result_modal.dart';
 import 'package:frontend_ascendere_platform/ui/modals/strategic_lines_modal.dart';
 import 'package:frontend_ascendere_platform/ui/modals/annexes_modal.dart';
@@ -225,7 +226,8 @@ class _ConvocatoriasViewState extends State<ConvocatoriasView> {
 
                 const SizedBox(height: 30),
                 // Rubrics
-                CardDashboard(
+                CardDashboardAction(
+                  onPressed: () => const RubricModal(),
                   title: 'Rubricas',
                   child: Column(
                     children: [
