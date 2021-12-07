@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CardDashboard extends StatelessWidget {
-  const CardDashboard({
+import 'package:frontend_ascendere_platform/ui/buttons/custom_icon_button_text.dart';
+
+class CardDashboardAction extends StatelessWidget {
+  const CardDashboardAction({
     Key? key,
-    this.title,
     required this.child,
+    required this.onPressed,
+    this.title,
     this.width,
     this.icon,
   }) : super(key: key);
@@ -14,6 +17,7 @@ class CardDashboard extends StatelessWidget {
   final Widget child;
   final double? width;
   final IconData? icon;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +35,30 @@ class CardDashboard extends StatelessWidget {
         children: [
           const SizedBox(height: 10),
           if (title != null) ...[
-            FittedBox(
-              fit: BoxFit.contain,
-              child: Text(
-                title!,
-                style: GoogleFonts.roboto(
-                  fontSize: 14,
-                  // fontWeight: FontWeight.bold,
+            Row(
+              children: [
+                FittedBox(
+                  fit: BoxFit.contain,
+                  child: Text(
+                    title!,
+                    style: GoogleFonts.roboto(
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
-              ),
+                const Spacer(),
+                CustomIconButtonText(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (_) => onPressed(),
+                    );
+                  },
+                  icon: Icons.add_outlined,
+                  text: 'Crear',
+                ),
+              ],
             ),
             const Divider(),
             const SizedBox(height: 10),

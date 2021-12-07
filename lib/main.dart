@@ -4,12 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:frontend_ascendere_platform/router/router.dart';
 
 import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
-import 'package:frontend_ascendere_platform/providers/convocatoria_provider.dart';
 import 'package:frontend_ascendere_platform/providers/options_avatar_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 import 'package:frontend_ascendere_platform/providers/users_provider.dart';
 import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
 import 'package:frontend_ascendere_platform/providers/resources_provider.dart';
+import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
+import 'package:frontend_ascendere_platform/providers/convocatoria/annexes_form_provider.dart';
 
 import 'package:frontend_ascendere_platform/services/local_storage.dart';
 import 'package:frontend_ascendere_platform/services/navigation_service.dart';
@@ -39,8 +40,9 @@ class AppState extends StatelessWidget {
             lazy: false, create: (_) => OptionsAvatarProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(create: (_) => UsersProvider()),
-        ChangeNotifierProvider(create: (_) => ConvocatoriaProvider()),
         ChangeNotifierProvider(create: (_) => ResourcesProvider()),
+        ChangeNotifierProvider(create: (_) => ConvocatoriaProvider()),
+        ChangeNotifierProvider(create: (_) => AnnexesFormProvider()),
       ],
       child: const MyApp(),
     );

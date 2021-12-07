@@ -98,6 +98,7 @@ class ConvocatoriaProvider extends ChangeNotifier {
   getAnexos() async {
     final resp = await MicroConvocatorias.get('/listarAnexos');
     List<dynamic> list = json.decode(resp);
+    anexos.clear();
 
     for (var anexo in list) {
       anexos.add(AnexosConvocatoria.fromMap(anexo));
@@ -106,6 +107,19 @@ class ConvocatoriaProvider extends ChangeNotifier {
     isLoading = false;
 
     notifyListeners();
+  }
+
+  registerAnnexe(String nameAnnexe, String linkAnnexe) async {
+    final data = {"nombreAnexo": nameAnnexe, "link": linkAnnexe};
+
+    try {
+      final resp = await MicroConvocatorias.post('/registrarAnexo', data);
+      getAnexos();
+
+      notifyListeners();
+    } catch (e) {
+      throw 'Error al crear categoria';
+    }
   }
 
   getLines() async {

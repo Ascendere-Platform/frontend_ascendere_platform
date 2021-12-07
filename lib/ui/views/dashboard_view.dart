@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/ui/cards/cards_data_home.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:frontend_ascendere_platform/ui/cards/cards_data_home.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class DashboardView extends StatefulWidget {
