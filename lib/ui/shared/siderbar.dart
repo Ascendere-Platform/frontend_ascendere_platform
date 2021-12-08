@@ -42,11 +42,11 @@ class Sidebar extends StatelessWidget {
           const SizedBox(height: 22),
           const TextSeparator(text: 'Convocatorias'),
           MenuItem(
-            isActive:
-                sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
+            isActive: sideMenuProvider.currentPage ==
+                Flurorouter.createConvocatoriasRoute,
             text: 'Nueva',
             icon: Icons.playlist_add,
-            onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
+            onPressed: () => navigateTo(Flurorouter.createConvocatoriasRoute),
           ),
           MenuItem(
             // isActive:
@@ -61,10 +61,12 @@ class Sidebar extends StatelessWidget {
               isActive: false,
               onPressed: () {}),
           MenuItem(
-              text: 'Todas',
-              icon: Icons.folder_open,
-              isActive: false,
-              onPressed: () {}),
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
+            text: 'Todas',
+            icon: Icons.folder_open,
+            onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
+          ),
 
           const SizedBox(height: 30),
           const TextSeparator(text: 'Recursos'),

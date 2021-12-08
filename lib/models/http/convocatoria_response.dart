@@ -62,7 +62,7 @@ class ConvocatoriaResponse {
         antecedentes: json["antecedentes"],
         objetivos: json["objetivos"],
         banner: json["banner"],
-        estado: json["estado"],
+        estado: json["estado"] ?? false,
         destinatario: json["destinatario"],
         reconocimiento: json["reconocimiento"],
         compromisos: json["compromisos"],

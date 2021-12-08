@@ -17,6 +17,7 @@ class Flurorouter {
   static String dashboardRoute = '/dashboard';
 
   static String convocatoriasRoute = '/dashboard/convocatorias';
+  static String createConvocatoriasRoute = '/dashboard/create_convocatorias';
 
   static String usersRoute = '/dashboard/users';
 
@@ -36,6 +37,10 @@ class Flurorouter {
     router.define(convocatoriasRoute,
         handler: DashboardHandlers.convocatorias,
         transitionType: TransitionType.fadeIn);
+    router.define(createConvocatoriasRoute,
+        handler: DashboardHandlers.createConvocatorias,
+        transitionType: TransitionType.fadeIn);
+
     router.define(usersRoute,
         handler: DashboardHandlers.users,
         transitionType: TransitionType.fadeIn);

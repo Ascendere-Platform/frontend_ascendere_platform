@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:frontend_ascendere_platform/api/micro_convocatorias.dart';
@@ -45,6 +44,20 @@ class ConvocatoriaProvider extends ChangeNotifier {
     getRubrics();
   }
 
+  getConvocatorias() async {
+    final resp = await MicroConvocatorias.get('/listarConvocatorias');
+    List<dynamic> list = json.decode(resp);
+    convocatorias.clear();
+
+    for (var convocatoria in list) {
+      convocatorias.add(ConvocatoriaResponse.fromMap(convocatoria));
+    }
+
+    isLoading = false;
+
+    notifyListeners();
+  }
+
   Future newConvocatoria() async {
     if (!validateForm()) return false;
 
@@ -69,7 +82,7 @@ class ConvocatoriaProvider extends ChangeNotifier {
     };
 
     try {
-      MicroConvocatorias.post('/registrarConvocatoria', data).then((resp) {
+      MicroConvocatorias.post('/listarConvocatorias', data).then((resp) {
         NotificationsService.showSnackbar('Convocatoria creada');
         return true;
       }).catchError((e) {
