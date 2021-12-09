@@ -58,6 +58,16 @@ class ConvocatoriaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<ConvocatoriaResponse?> getConvocatoriasId(String id) async {
+    try {
+      final resp = await MicroConvocatorias.get('/buscarConvocatoria?id=$id');
+      final conv = ConvocatoriaResponse.fromJson(resp);
+      return conv;
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future newConvocatoria() async {
     if (!validateForm()) return false;
 

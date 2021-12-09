@@ -9,7 +9,7 @@ class MicroConvocatorias {
       Uri.parse('http://34.123.204.176$path'),
       headers: {
         'Authorization': 'Bearer ${LocalStorage.prefs.getString('token')}',
-      }, 
+      },
       body: jsonEncode(data),
     );
 
@@ -31,7 +31,23 @@ class MicroConvocatorias {
     if (response.statusCode == 201) {
       return response.body;
     } else {
-      throw Exception('Error en el POST');
+      throw Exception('Error en el GET');
+    }
+  }
+
+  static Future put(String path, Map<String, dynamic> data) async {
+    http.Response response = await http.put(
+      Uri.parse('http://34.123.204.176$path'),
+      headers: {
+        'Authorization': 'Bearer ${LocalStorage.prefs.getString('token')}',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 201) {
+      return response.body;
+    } else {
+      throw Exception('Error en el PUT');
     }
   }
 }

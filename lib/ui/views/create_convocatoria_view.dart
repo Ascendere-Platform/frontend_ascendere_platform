@@ -6,8 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
-import 'package:frontend_ascendere_platform/services/notifications_service.dart';
-
 import 'package:frontend_ascendere_platform/providers/resources_provider.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
 
@@ -518,13 +516,8 @@ class _CreateConvocatoriaViewState extends State<CreateConvocatoriaView> {
 
                         final save =
                             await convocatoriasProvider.newConvocatoria();
-                        if (save) {
-                          NotificationsService.showSnackbar(
-                              'Convocatoria creada');
-                          // TODO: actualizar convocatoria
-                        } else {
-                          NotificationsService.showSnackbarError(
-                              'No se pudo crear la convocatoria');
+
+                        if (!save) {
                           convocatoriasProvider.newAnnexes.clear();
                           convocatoriasProvider.newStrategicLines.clear();
                           convocatoriasProvider.newExpectedResults.clear();

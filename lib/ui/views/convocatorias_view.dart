@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_ascendere_platform/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -17,8 +18,7 @@ class ConvocatoriasView extends StatefulWidget {
 class _ConvocatoriasViewState extends State<ConvocatoriasView> {
   @override
   Widget build(BuildContext context) {
-    final convocatoriasProvider =
-        Provider.of<ConvocatoriaProvider>(context);
+    final convocatoriasProvider = Provider.of<ConvocatoriaProvider>(context);
     convocatoriasProvider.getConvocatorias();
 
     final convocatorias = convocatoriasProvider.convocatorias;
@@ -44,17 +44,27 @@ class _ConvocatoriasViewState extends State<ConvocatoriasView> {
                 children: List.generate(
                   convocatorias.length,
                   (index) {
-                    return CardConvocatorias(
-                      state: convocatorias[index].estado,
-                      title: convocatorias[index].nombreConvocatoria,
-                      child: Text(
-                        DateFormat('EEEE, MMMM dd')
-                            .format(convocatorias[index].fechaCreacion),
-                        style: GoogleFonts.quicksand(
-                          fontSize: 14,
+                    return Material(
+                      // borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      // elevation: 3,
+                      child: InkWell(
+                        onTap: () {
+                          NavigationService.naviageTo(
+                              '/dashboard/convocatorias/${convocatorias[index].id}');
+                        },
+                        child: CardConvocatorias(
+                          state: convocatorias[index].estado,
+                          title: convocatorias[index].nombreConvocatoria,
+                          child: Text(
+                            DateFormat('EEEE, MMMM dd')
+                                .format(convocatorias[index].fechaCreacion),
+                            style: GoogleFonts.quicksand(
+                              fontSize: 14,
+                            ),
+                          ),
+                          // width: 225,
                         ),
                       ),
-                      // width: 225,
                     );
                   },
                 ),

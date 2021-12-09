@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:frontend_ascendere_platform/router/router.dart';
 
+import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_form_provider.dart';
 import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
 import 'package:frontend_ascendere_platform/providers/options_avatar_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
@@ -51,6 +52,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ExpectedResultFormProvider()),
         ChangeNotifierProvider(create: (_) => RubricFormProvider()),
         ChangeNotifierProvider(create: (_) => TypesProjectFormProvider()),
+        ChangeNotifierProvider(create: (_) => ConvocatoriaFormProvider()),
       ],
       child: const MyApp(),
     );

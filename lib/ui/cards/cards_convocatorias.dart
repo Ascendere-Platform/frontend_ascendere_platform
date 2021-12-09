@@ -57,7 +57,7 @@ class CardConvocatorias extends StatelessWidget {
                 child: Center(
                   child: (state)
                       ? Text(
-                          'Creada',
+                          'Publicada',
                           style: GoogleFonts.quicksand(
                             fontSize: 12,
                             color: const Color(0xFF667684),
@@ -65,7 +65,7 @@ class CardConvocatorias extends StatelessWidget {
                           ),
                         )
                       : Text(
-                          'Publicada',
+                          'Creada',
                           style: GoogleFonts.quicksand(
                             fontSize: 12,
                             color: const Color(0xFF667684),
