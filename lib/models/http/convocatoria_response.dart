@@ -224,15 +224,15 @@ class RecursosConvocatoria {
     required this.nombreRecurso,
     required this.cantidadExistente,
     required this.cantidadDisponible,
-    required this.imagen,
     required this.tipoRecurso,
+    this.imagen,
   });
 
   String id;
   String nombreRecurso;
   int cantidadExistente;
   int cantidadDisponible;
-  String imagen;
+  String? imagen;
   TipoRecurso tipoRecurso;
 
   factory RecursosConvocatoria.fromJson(String str) =>
@@ -246,7 +246,7 @@ class RecursosConvocatoria {
         nombreRecurso: json["nombreRecurso"],
         cantidadExistente: json["cantidadExistente"],
         cantidadDisponible: json["cantidadDisponible"],
-        imagen: json["imagen"],
+        imagen: json["imagen"] ?? '',
         tipoRecurso: TipoRecurso.fromMap(json["TipoRecurso"]),
       );
 

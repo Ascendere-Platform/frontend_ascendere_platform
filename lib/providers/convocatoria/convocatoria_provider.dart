@@ -92,7 +92,7 @@ class ConvocatoriaProvider extends ChangeNotifier {
     };
 
     try {
-      MicroConvocatorias.post('/listarConvocatorias', data).then((resp) {
+      MicroConvocatorias.post('/registrarConvocatoria', data).then((resp) {
         NotificationsService.showSnackbar('Convocatoria creada');
         return true;
       }).catchError((e) {
