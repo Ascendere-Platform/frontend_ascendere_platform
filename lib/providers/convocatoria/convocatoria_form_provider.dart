@@ -103,7 +103,6 @@ class ConvocatoriaFormProvider extends ChangeNotifier {
 
   Future updateConvocatoria() async {
     if (!validateForm()) {
-      print('es el formulario');
       return false;
     }
 
@@ -127,8 +126,6 @@ class ConvocatoriaFormProvider extends ChangeNotifier {
       "rubricasConvocatoria": conv!.rubricasConvocatoria,
       "recursosConvocatoria": conv!.recursosConvocatoria,
     };
-
-    print(data);
 
     try {
       MicroConvocatorias.put('/actualizarConvocatoria', data).then((resp) {

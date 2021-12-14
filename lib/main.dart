@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/providers/resources_form_provider.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 
 import 'package:frontend_ascendere_platform/router/router.dart';
 
+import 'package:frontend_ascendere_platform/providers/resources_form_provider.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_form_provider.dart';
 import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
 import 'package:frontend_ascendere_platform/providers/options_avatar_provider.dart';
@@ -18,10 +19,13 @@ import 'package:frontend_ascendere_platform/providers/convocatoria/expected_resu
 import 'package:frontend_ascendere_platform/providers/convocatoria/rubric_form.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/types_project_form_provider.dart';
 
+import 'package:frontend_ascendere_platform/models/user.dart';
+
 import 'package:frontend_ascendere_platform/services/local_storage.dart';
 import 'package:frontend_ascendere_platform/services/navigation_service.dart';
 import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 
+import 'package:frontend_ascendere_platform/ui/layouts/dashboard/dashboard_docente_layout.dart';
 import 'package:frontend_ascendere_platform/ui/layouts/auth/auth_layouts.dart';
 import 'package:frontend_ascendere_platform/ui/layouts/dashboard/dashboard_layout.dart';
 import 'package:frontend_ascendere_platform/ui/layouts/splash/splash_layout.dart';
@@ -81,7 +85,11 @@ class MyApp extends StatelessWidget {
         }
 
         if (authProvider.authStatus == AuthStatus.authenticated) {
-          return DashboardLayout(child: child!);
+          Map<String, dynamic> decodedToken =
+              JwtDecoder.decode(LocalStorage.prefs.getString('token') ?? '');
+          final user = User.fromMap(decodedToken);
+          if (user.rol == 'admin') return DashboardLayout(child: child!);
+          return DashboardDocenteLayout(child: child!);
         } else {
           return AuthLayout(child: child!);
         }
