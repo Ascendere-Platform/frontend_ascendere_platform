@@ -46,4 +46,20 @@ class MicroUsers {
       throw Exception('Error en el POST');
     }
   }
+
+  static Future put(String path) async {
+    http.Response response = await http.put(
+      Uri.parse(
+          'http://34.123.95.33/$path'),
+      headers: {
+        'Authorization': 'Bearer ${LocalStorage.prefs.getString('token')}',
+      },
+    );
+
+    if (response.statusCode == 201) {
+      return response.body;
+    } else {
+      throw Exception('Error en el PUT' + response.statusCode.toString());
+    }
+  }
 }

@@ -13,7 +13,16 @@ class ResourcesDataSource extends DataTableSource {
 
   @override
   DataRow getRow(int index) {
+    final resourcesProvider =
+        Provider.of<ResourcesProvider>(context, listen: false);
+
+    final typesResources = resourcesProvider.types;
+
     final resource = resources[index];
+
+    final indexTipo =
+        typesResources.indexWhere((element) => element.id == resource.tipoid);
+
     // linkIMG
     final image = (resource.imagen == '' || resource.imagen == 'linkIMG')
         ? const Image(
@@ -38,7 +47,9 @@ class ResourcesDataSource extends DataTableSource {
         DataCell(Text(resource.nombreRecurso)),
         DataCell(Text(resource.cantidadExistente.toString())),
         DataCell(Text(resource.cantidadDisponible.toString())),
-        DataCell(Text(resource.tipoid)),
+        DataCell(Text((indexTipo < 0)
+            ? 'No tiene tipo'
+            : typesResources[indexTipo].nombreTipo)),
         DataCell(
           Row(
             children: [

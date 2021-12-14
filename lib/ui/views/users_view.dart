@@ -23,7 +23,7 @@ class _UsersViewState extends State<UsersView> {
   Widget build(BuildContext context) {
     final usersProvider = Provider.of<UsersProvider>(context);
 
-    final usersDataSource = UsersDataSource(usersProvider.users);
+    final usersDataSource = UsersDataSource(usersProvider.users, context);
 
     return ListView(
       children: [
@@ -49,6 +49,7 @@ class _UsersViewState extends State<UsersView> {
             sortAscending: usersProvider.ascending,
             sortColumnIndex: usersProvider.sortColumnIndex,
             columns: [
+              const DataColumn(label: Text('Imagen')),
               DataColumn(
                   label: const Text('Nombre'),
                   onSort: (colIndex, _) {
@@ -61,7 +62,7 @@ class _UsersViewState extends State<UsersView> {
                     usersProvider.sortColumnIndex = colIndex;
                     usersProvider.sort<String>((user) => user.email);
                   }),
-              const DataColumn(label: Text('UID')),
+              const DataColumn(label: Text('Tipo de Usuario')),
               const DataColumn(label: Text('Acciones')),
             ],
             source: usersDataSource,
