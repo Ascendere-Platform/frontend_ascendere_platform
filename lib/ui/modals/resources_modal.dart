@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
@@ -10,6 +9,7 @@ import 'package:frontend_ascendere_platform/services/notifications_service.dart'
 
 import 'package:frontend_ascendere_platform/models/http/resource_response.dart';
 
+import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard.dart';
 import 'package:frontend_ascendere_platform/ui/buttons/custom_outlined_button.dart';
 import 'package:frontend_ascendere_platform/ui/inputs/custom_inputs.dart';
 import 'package:frontend_ascendere_platform/ui/labels/custom_labels.dart';

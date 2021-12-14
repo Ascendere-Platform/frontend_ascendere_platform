@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:frontend_ascendere_platform/providers/resources_provider.dart';
 
 import 'package:frontend_ascendere_platform/models/http/resource_response.dart';
-import 'package:frontend_ascendere_platform/providers/resources_provider.dart';
+
 import 'package:frontend_ascendere_platform/ui/modals/resources_modal.dart';
-import 'package:provider/provider.dart';
 
 class ResourcesDataSource extends DataTableSource {
   final List<ResourceResponse> resources;

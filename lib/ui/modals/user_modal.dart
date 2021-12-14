@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/models/http/profile.dart';
-import 'package:frontend_ascendere_platform/providers/users_provider.dart';
-import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 
-import 'package:frontend_ascendere_platform/providers/resources_form_provider.dart';
-import 'package:frontend_ascendere_platform/providers/resources_provider.dart';
+import 'package:frontend_ascendere_platform/providers/users_provider.dart';
 
 import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 
+import 'package:frontend_ascendere_platform/models/http/profile.dart';
+
+import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard.dart';
 import 'package:frontend_ascendere_platform/ui/buttons/custom_outlined_button.dart';
 import 'package:frontend_ascendere_platform/ui/labels/custom_labels.dart';
 

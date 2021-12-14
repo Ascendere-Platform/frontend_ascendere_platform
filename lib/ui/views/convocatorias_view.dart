@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+
+import 'package:frontend_ascendere_platform/services/navigation_service.dart';
 
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
 

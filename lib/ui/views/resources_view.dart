@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/ui/modals/resources_modal.dart';
 import 'package:provider/provider.dart';
 
 import 'package:frontend_ascendere_platform/providers/resources_provider.dart';
 
 import 'package:frontend_ascendere_platform/datatables/resources_datasource.dart';
 
+import 'package:frontend_ascendere_platform/ui/modals/resources_modal.dart';
 import 'package:frontend_ascendere_platform/ui/buttons/custom_icon_button_text.dart';
 import 'package:frontend_ascendere_platform/ui/labels/custom_labels.dart';
 

@@ -1,7 +1,4 @@
 import 'package:fluro/fluro.dart';
-import 'package:frontend_ascendere_platform/ui/views/convocatoria_view.dart';
-import 'package:frontend_ascendere_platform/ui/views/convocatorias_view.dart';
-import 'package:frontend_ascendere_platform/ui/views/resources_view.dart';
 import 'package:provider/provider.dart';
 
 import 'package:frontend_ascendere_platform/router/router.dart';
@@ -13,6 +10,9 @@ import 'package:frontend_ascendere_platform/ui/views/users_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/create_convocatoria_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/dashboard_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/login_view.dart';
+import 'package:frontend_ascendere_platform/ui/views/convocatoria_view.dart';
+import 'package:frontend_ascendere_platform/ui/views/convocatorias_view.dart';
+import 'package:frontend_ascendere_platform/ui/views/resources_view.dart';
 
 class DashboardHandlers {
   static Handler dashboard = Handler(handlerFunc: (context, params) {

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/models/http/convocatoria_register.dart';
-import 'package:frontend_ascendere_platform/models/http/convocatoria_response.dart';
-import 'package:frontend_ascendere_platform/models/http/resource_response.dart';
+import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_form_provider.dart';
-import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
 import 'package:frontend_ascendere_platform/providers/resources_provider.dart';
+import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
+
 import 'package:frontend_ascendere_platform/services/navigation_service.dart';
+
+import 'package:frontend_ascendere_platform/models/http/convocatoria_register.dart';
+import 'package:frontend_ascendere_platform/models/http/resource_response.dart';
+import 'package:frontend_ascendere_platform/models/http/convocatoria_response.dart';
+
 import 'package:frontend_ascendere_platform/ui/buttons/custom_icon_button_text.dart';
 import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard.dart';
 import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard_action.dart';
@@ -15,10 +23,6 @@ import 'package:frontend_ascendere_platform/ui/modals/expected_result_modal.dart
 import 'package:frontend_ascendere_platform/ui/modals/rubric_modal.dart';
 import 'package:frontend_ascendere_platform/ui/modals/strategic_lines_modal.dart';
 import 'package:frontend_ascendere_platform/ui/modals/types_project_modal.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:provider/provider.dart';
 
 class ConvocatoriaView extends StatefulWidget {
   const ConvocatoriaView({Key? key, required this.cid}) : super(key: key);
@@ -341,8 +345,8 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                     }
                     return null;
                   },
-                  onChanged: (value) => convFormProvider.copyConvocatoriaWith(
-                      compromisos: value),
+                  onChanged: (value) =>
+                      convFormProvider.copyConvocatoriaWith(compromisos: value),
                 ),
               ],
             ),
@@ -365,8 +369,7 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                       onSelected: (selected) {
                         setState(() {
                           if (selected) {
-                            _selectedtypesProject
-                                .add(typesProjects[index].id);
+                            _selectedtypesProject.add(typesProjects[index].id);
                           } else {
                             _selectedtypesProject.removeWhere((id) {
                               return id == typesProjects[index].id;
@@ -419,8 +422,8 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                 ),
                 if (hasAnnexes) ...[
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 2, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                     child: Wrap(
                       alignment: WrapAlignment.start,
                       spacing: 5,
@@ -477,8 +480,8 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                 ),
                 if (hasStrategicLines) ...[
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 2, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                     child: Wrap(
                       alignment: WrapAlignment.start,
                       spacing: 5,
@@ -535,8 +538,8 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                 ),
                 if (hasExpectedResults) ...[
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 2, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                     child: Wrap(
                       alignment: WrapAlignment.start,
                       spacing: 5,
@@ -593,8 +596,8 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                 ),
                 if (hasRubrics) ...[
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 2, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                     child: Wrap(
                       alignment: WrapAlignment.start,
                       spacing: 5,
@@ -602,8 +605,8 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                         conv.rubricasConvocatoria.length,
                         (index) {
                           return Chip(
-                            label: Text(conv
-                                .rubricasConvocatoria[index].nombreRubrica),
+                            label: Text(
+                                conv.rubricasConvocatoria[index].nombreRubrica),
                           );
                         },
                       ),
@@ -649,8 +652,8 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                 ),
                 if (hasResource) ...[
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 2, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
                     child: Wrap(
                       alignment: WrapAlignment.start,
                       spacing: 5,
@@ -658,8 +661,8 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                         conv.recursosConvocatoria.length,
                         (index) {
                           return Chip(
-                            label: Text(conv
-                                .recursosConvocatoria[index].nombreRecurso),
+                            label: Text(
+                                conv.recursosConvocatoria[index].nombreRecurso),
                           );
                         },
                       ),
@@ -743,8 +746,7 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
               const Spacer(),
               CustomIconButtonText(
                 onPressed: () async {
-                  convocatoriasProvider.newTypesProject =
-                      _selectedtypesProject;
+                  convocatoriasProvider.newTypesProject = _selectedtypesProject;
 
                   if (hasAnnexes) {
                     for (var item in conv.anexosConvocatoria) {
@@ -801,8 +803,7 @@ class _ModifyConvocatoriaViewState extends State<_ModifyConvocatoriaView> {
                     resultadosEsperados:
                         convocatoriasProvider.newExpectedResults,
                     tiposProyectos: _selectedtypesProject,
-                    lineasEstrategicas:
-                        convocatoriasProvider.newStrategicLines,
+                    lineasEstrategicas: convocatoriasProvider.newStrategicLines,
                     rubricasConvocatoria: convocatoriasProvider.newRubrics,
                     recursosConvocatoria: convocatoriasProvider.newResource,
                   );

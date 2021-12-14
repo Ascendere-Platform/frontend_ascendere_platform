@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:frontend_ascendere_platform/models/http/profile.dart';
+
 import 'package:frontend_ascendere_platform/ui/modals/user_modal.dart';
 
 class UsersDataSource extends DataTableSource {
