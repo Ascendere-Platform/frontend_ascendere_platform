@@ -47,7 +47,12 @@ class _ResourcesViewState extends State<ResourcesView> {
                     }),
                 const DataColumn(label: Text('Cant. Existente')),
                 const DataColumn(label: Text('Cant. Disponible')),
-                const DataColumn(label: Text('Tipo')),
+                DataColumn(
+                    label: const Text('Tipo'),
+                    onSort: (colIndex, _) {
+                      resourcesProvider.sortColumnIndex = colIndex;
+                      resourcesProvider.sort<String>((user) => user.tipoid);
+                    }),
                 const DataColumn(label: Text('Acciones')),
               ],
               source: usersDataSource,

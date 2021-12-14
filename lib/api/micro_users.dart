@@ -59,7 +59,7 @@ class MicroUsers {
     if (response.statusCode == 201) {
       return response.body;
     } else {
-      throw Exception('Error en el PUT' + response.statusCode.toString());
+      throw Exception('Error en el PUT');
     }
   }
 }

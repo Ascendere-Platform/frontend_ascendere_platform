@@ -62,7 +62,12 @@ class _UsersViewState extends State<UsersView> {
                     usersProvider.sortColumnIndex = colIndex;
                     usersProvider.sort<String>((user) => user.email);
                   }),
-              const DataColumn(label: Text('Tipo de Usuario')),
+              DataColumn(
+                  label: const Text('Tipo de Usuario'),
+                  onSort: (colIndex, _) {
+                    usersProvider.sortColumnIndex = colIndex;
+                    usersProvider.sort<String>((user) => user.rol.id);
+                  }),
               const DataColumn(label: Text('Acciones')),
             ],
             source: usersDataSource,
