@@ -6,16 +6,16 @@ class ResourceResponse {
     required this.nombreRecurso,
     required this.cantidadExistente,
     required this.cantidadDisponible,
-    required this.imagen,
     required this.tipoid,
+    this.imagen,
   });
 
   String id;
   String nombreRecurso;
   int cantidadExistente;
   int cantidadDisponible;
-  String imagen;
   String tipoid;
+  String? imagen;
 
   factory ResourceResponse.fromJson(String str) =>
       ResourceResponse.fromMap(json.decode(str));
@@ -28,7 +28,7 @@ class ResourceResponse {
         nombreRecurso: json["nombreRecurso"],
         cantidadExistente: json["cantidadExistente"],
         cantidadDisponible: json["cantidadDisponible"],
-        imagen: json["imagen"],
+        imagen: json["imagen"] ?? '',
         tipoid: json["tipoid"],
       );
 

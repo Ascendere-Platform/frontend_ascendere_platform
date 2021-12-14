@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:frontend_ascendere_platform/ui/views/convocatoria_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/convocatorias_view.dart';
+import 'package:frontend_ascendere_platform/ui/views/resources_view.dart';
 import 'package:provider/provider.dart';
 
 import 'package:frontend_ascendere_platform/router/router.dart';
@@ -73,6 +74,18 @@ class DashboardHandlers {
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return const UsersView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler resources = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.resourceRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const ResourcesView();
     } else {
       return const LoginView();
     }

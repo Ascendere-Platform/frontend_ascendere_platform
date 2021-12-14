@@ -48,44 +48,46 @@ class Sidebar extends StatelessWidget {
             icon: Icons.playlist_add,
             onPressed: () => navigateTo(Flurorouter.createConvocatoriasRoute),
           ),
+          // MenuItem(
+          //   // isActive:
+          //   //     sideMenuProvider.currentPage == Flurorouter.categoriesRoute,
+          //   text: 'Revisar',
+          //   icon: Icons.playlist_add_check,
+          //   onPressed: () {},
+          // ),
           MenuItem(
-            // isActive:
-            //     sideMenuProvider.currentPage == Flurorouter.categoriesRoute,
-            text: 'Revisar',
-            icon: Icons.playlist_add_check,
-            onPressed: () {},
-          ),
-          MenuItem(
-              text: 'Publicar',
-              icon: Icons.send,
-              isActive: false,
-              onPressed: () {}),
-          MenuItem(
+            text: 'Publicar',
+            icon: Icons.send,
             isActive:
                 sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
-            text: 'Todas',
-            icon: Icons.folder_open,
             onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
           ),
+          // MenuItem(
+          //   isActive:
+          //       sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
+          //   text: 'Todas',
+          //   icon: Icons.folder_open,
+          //   onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
+          // ),
 
           const SizedBox(height: 30),
           const TextSeparator(text: 'Recursos'),
           MenuItem(
-            // isActive: sideMenuProvider.currentPage == Flurorouter.iconsRoute,
-            text: 'Ingresar Recurso',
+            isActive: sideMenuProvider.currentPage == Flurorouter.resourceRoute,
+            text: 'Gestionar Recursos',
             icon: Icons.playlist_add,
-            onPressed: () {},
+            onPressed: () => navigateTo(Flurorouter.resourceRoute),
           ),
-          MenuItem(
-              text: 'Pedidos Pendientes',
-              icon: Icons.list_alt_sharp,
-              isActive: false,
-              onPressed: () {}),
-          MenuItem(
-              text: 'Solcitar Recursos',
-              icon: Icons.person_add,
-              isActive: false,
-              onPressed: () {}),
+          // MenuItem(
+          //     text: 'Pedidos Pendientes',
+          //     icon: Icons.list_alt_sharp,
+          //     isActive: false,
+          //     onPressed: () {}),
+          // MenuItem(
+          //     text: 'Solcitar Recursos',
+          //     icon: Icons.person_add,
+          //     isActive: false,
+          //     onPressed: () {}),
 
           const SizedBox(height: 30),
           const TextSeparator(text: 'Docentes'),

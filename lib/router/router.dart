@@ -20,6 +20,8 @@ class Flurorouter {
   static String convocatoriaRoute = '/dashboard/convocatorias/:uid';
   static String createConvocatoriasRoute = '/dashboard/create_convocatorias';
 
+  static String resourceRoute = '/dashboard/resources';
+
   static String usersRoute = '/dashboard/users';
 
   static void configureRoutes() {
@@ -43,10 +45,15 @@ class Flurorouter {
         transitionType: TransitionType.fadeIn);
 
     router.define(convocatoriaRoute,
-        handler: DashboardHandlers.convocatoria, transitionType: TransitionType.fadeIn);
+        handler: DashboardHandlers.convocatoria,
+        transitionType: TransitionType.fadeIn);
 
     router.define(usersRoute,
         handler: DashboardHandlers.users,
+        transitionType: TransitionType.fadeIn);
+
+    router.define(resourceRoute,
+        handler: DashboardHandlers.resources,
         transitionType: TransitionType.fadeIn);
 
     // No page Found
