@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 
 import 'package:frontend_ascendere_platform/router/admin_handlers.dart';
+import 'package:frontend_ascendere_platform/router/dashboard_docentes_handlers.dart';
 import 'package:frontend_ascendere_platform/router/dashboard_handlers.dart';
 import 'package:frontend_ascendere_platform/router/no_page_found_handlers.dart';
 
@@ -23,6 +24,17 @@ class Flurorouter {
   static String resourceRoute = '/dashboard/resources';
 
   static String usersRoute = '/dashboard/users';
+
+  static String usersSettingsRoute = '/dashboard/user-settings';
+
+  static String postulacionesRoute = '/dashboard/postulaciones';
+
+  // Dashboard Docentes
+  static String convocatoriasLastRoute =
+      '/dashboard/docentes/convocatoria-vigente';
+  static String postularRoute = '/dashboard/docentes/postular';
+  static String mypostulacionesRoute = '/dashboard/docentes/mis-postualciones';
+  static String networkDocente = '/dashboard/docentes/red-docentes';
 
   static void configureRoutes() {
     // Auth Routes
@@ -54,6 +66,31 @@ class Flurorouter {
 
     router.define(resourceRoute,
         handler: DashboardHandlers.resources,
+        transitionType: TransitionType.fadeIn);
+
+    router.define(usersSettingsRoute,
+        handler: DashboardHandlers.usersSettings,
+        transitionType: TransitionType.fadeIn);
+
+    router.define(postulacionesRoute,
+        handler: DashboardHandlers.postulaciones,
+        transitionType: TransitionType.fadeIn);
+
+    // Dashboard Docentes
+    router.define(convocatoriasLastRoute,
+        handler: DashboardDocentesHandlers.convocatoriaLast,
+        transitionType: TransitionType.fadeIn);
+
+    router.define(postularRoute,
+        handler: DashboardDocentesHandlers.postular,
+        transitionType: TransitionType.fadeIn);
+
+    router.define(networkDocente,
+        handler: DashboardDocentesHandlers.networkDocente,
+        transitionType: TransitionType.fadeIn);
+
+    router.define(mypostulacionesRoute,
+        handler: DashboardDocentesHandlers.myPostulaciones,
         transitionType: TransitionType.fadeIn);
 
     // No page Found

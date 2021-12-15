@@ -26,7 +26,6 @@ class SidebarDocente extends StatelessWidget {
     return Container(
       width: 212,
       height: double.infinity,
-      // color: Colors.red,
       decoration: buildBoxDecoration(),
       child: ListView(
         physics: const ClampingScrollPhysics(),
@@ -43,69 +42,35 @@ class SidebarDocente extends StatelessWidget {
           const TextSeparator(text: 'Convocatorias'),
           MenuItem(
             isActive: sideMenuProvider.currentPage ==
-                Flurorouter.createConvocatoriasRoute,
-            text: 'Vigente',
+                Flurorouter.convocatoriasLastRoute,
+            text: 'Convocatoria Vigente',
             icon: Icons.article,
-            onPressed: () {},
+            onPressed: () => navigateTo(Flurorouter.convocatoriasLastRoute),
           ),
-          // MenuItem(
-          //   // isActive:
-          //   //     sideMenuProvider.currentPage == Flurorouter.categoriesRoute,
-          //   text: 'Revisar',
-          //   icon: Icons.playlist_add_check,
-          //   onPressed: () {},
-          // ),
-          // MenuItem(
-          //   text: 'Publicar',
-          //   icon: Icons.send,
-          //   isActive:
-          //       sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
-          //   onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
-          // ),
-          // MenuItem(
-          //   isActive:
-          //       sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
-          //   text: 'Todas',
-          //   icon: Icons.folder_open,
-          //   onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
-          // ),
-
           const SizedBox(height: 30),
           const TextSeparator(text: 'Proyectos'),
           MenuItem(
-            isActive: sideMenuProvider.currentPage == Flurorouter.resourceRoute,
+            isActive: sideMenuProvider.currentPage == Flurorouter.postularRoute,
             text: 'Postular',
             icon: Icons.add,
-            onPressed: () => navigateTo(Flurorouter.resourceRoute),
+            onPressed: () => navigateTo(Flurorouter.postularRoute),
           ),
-          // MenuItem(
-          //     text: 'Pedidos Pendientes',
-          //     icon: Icons.list_alt_sharp,
-          //     isActive: false,
-          //     onPressed: () {}),
-          // MenuItem(
-          //     text: 'Solcitar Recursos',
-          //     icon: Icons.person_add,
-          //     isActive: false,
-          //     onPressed: () {}),
-
-          // const SizedBox(height: 30),
-          // const TextSeparator(text: 'Docentes'),
-          // MenuItem(
-          //   // isActive: sideMenuProvider.currentPage == Flurorouter.iconsRoute,
-          //   text: 'Red de Docentes',
-          //   icon: Icons.sentiment_satisfied_alt,
-          //   onPressed: () {},
-          // ),
-          // const SizedBox(height: 50),
-          // // const Spacer(),
-          // const TextSeparator(text: 'Administrador'),
-          // MenuItem(
-          //   isActive: sideMenuProvider.currentPage == Flurorouter.usersRoute,
-          //   text: 'Gestionar Usuarios',
-          //   icon: Icons.supervised_user_circle,
-          //   onPressed: () => navigateTo(Flurorouter.usersRoute),
-          // ),
+          MenuItem(
+            isActive: sideMenuProvider.currentPage ==
+                Flurorouter.mypostulacionesRoute,
+            text: 'Mis postulaciones',
+            icon: Icons.list,
+            onPressed: () => navigateTo(Flurorouter.mypostulacionesRoute),
+          ),
+          const SizedBox(height: 30),
+          const TextSeparator(text: 'Docentes'),
+          MenuItem(
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.networkDocente,
+            text: 'Red de Docentes',
+            icon: Icons.sentiment_satisfied_alt,
+            onPressed: () => navigateTo(Flurorouter.networkDocente),
+          ),
         ],
       ),
     );

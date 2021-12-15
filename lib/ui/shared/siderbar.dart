@@ -26,7 +26,6 @@ class Sidebar extends StatelessWidget {
     return Container(
       width: 212,
       height: double.infinity,
-      // color: Colors.red,
       decoration: buildBoxDecoration(),
       child: ListView(
         physics: const ClampingScrollPhysics(),
@@ -48,13 +47,6 @@ class Sidebar extends StatelessWidget {
             icon: Icons.playlist_add,
             onPressed: () => navigateTo(Flurorouter.createConvocatoriasRoute),
           ),
-          // MenuItem(
-          //   // isActive:
-          //   //     sideMenuProvider.currentPage == Flurorouter.categoriesRoute,
-          //   text: 'Revisar',
-          //   icon: Icons.playlist_add_check,
-          //   onPressed: () {},
-          // ),
           MenuItem(
             text: 'Publicar',
             icon: Icons.send,
@@ -62,14 +54,6 @@ class Sidebar extends StatelessWidget {
                 sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
             onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
           ),
-          // MenuItem(
-          //   isActive:
-          //       sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
-          //   text: 'Todas',
-          //   icon: Icons.folder_open,
-          //   onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
-          // ),
-
           const SizedBox(height: 30),
           const TextSeparator(text: 'Recursos'),
           MenuItem(
@@ -78,25 +62,22 @@ class Sidebar extends StatelessWidget {
             icon: Icons.playlist_add,
             onPressed: () => navigateTo(Flurorouter.resourceRoute),
           ),
-          // MenuItem(
-          //     text: 'Pedidos Pendientes',
-          //     icon: Icons.list_alt_sharp,
-          //     isActive: false,
-          //     onPressed: () {}),
-          // MenuItem(
-          //     text: 'Solcitar Recursos',
-          //     icon: Icons.person_add,
-          //     isActive: false,
-          //     onPressed: () {}),
-
           const SizedBox(height: 30),
-          const TextSeparator(text: 'Docentes'),
+          const TextSeparator(text: 'Proyectos'),
           MenuItem(
-            // isActive: sideMenuProvider.currentPage == Flurorouter.iconsRoute,
-            text: 'Red de Docentes',
-            icon: Icons.sentiment_satisfied_alt,
-            onPressed: () {},
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.postulacionesRoute,
+            text: 'Postulaciones',
+            icon: Icons.playlist_add_check,
+            onPressed: () => navigateTo(Flurorouter.postulacionesRoute),
           ),
+          // MenuItem(
+          //   text: 'Proyectos Aprobados',
+          //   icon: Icons.check,
+          //   isActive:
+          //       sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
+          //   onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
+          // ),
           const SizedBox(height: 50),
           // const Spacer(),
           const TextSeparator(text: 'Administrador'),

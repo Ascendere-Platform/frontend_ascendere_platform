@@ -30,6 +30,7 @@ class AuthProvider extends ChangeNotifier {
       LocalStorage.prefs.setString('token', authResponse.token);
 
       NavigationService.replaceTo(Flurorouter.dashboardRoute);
+
       notifyListeners();
     }).catchError((e) {
       NotificationsService.showSnackbarError(

@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
 import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
+import 'package:frontend_ascendere_platform/providers/options_avatar_provider.dart';
+
+import 'package:frontend_ascendere_platform/router/router.dart';
 
 import 'package:frontend_ascendere_platform/services/navigation_service.dart';
 
@@ -23,6 +26,7 @@ class OptionsAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sideMenuProvider = Provider.of<SideMenuProvider>(context);
     final profileProvider = Provider.of<ProfileProvider>(context);
 
     final profile = profileProvider.profile;
@@ -56,17 +60,21 @@ class OptionsAvatar extends StatelessWidget {
           const SizedBox(height: 22),
           const TextSeparator(text: 'Acciones'),
           MenuItem(
-            // isActive:
-            //     sideMenuProvider.currentPage == Flurorouter.categoriesRoute,
+            isActive:
+                sideMenuProvider.currentPage == Flurorouter.usersSettingsRoute,
             text: 'Configuración',
             icon: Icons.settings,
-            onPressed: () {},
+            onPressed: () {
+              OptionsAvatarProvider.closeMenu();
+              navigateTo(Flurorouter.usersSettingsRoute);
+            },
           ),
           MenuItem(
             text: 'Cerrar Sesión',
             icon: Icons.exit_to_app_outlined,
             isActive: false,
             onPressed: () {
+              OptionsAvatarProvider.closeMenu();
               Provider.of<AuthProvider>(context, listen: false).logout();
             },
           ),

@@ -88,7 +88,12 @@ class MyApp extends StatelessWidget {
           Map<String, dynamic> decodedToken =
               JwtDecoder.decode(LocalStorage.prefs.getString('token') ?? '');
           final user = User.fromMap(decodedToken);
-          if (user.rol == 'admin') return DashboardLayout(child: child!);
+          Provider.of<ProfileProvider>(context, listen: false).getProfile();
+          if (user.rol == 'admin') {
+            // NavigationService.replaceTo(Flurorouter.dashboardRoute);
+            return DashboardLayout(child: child!);
+          }
+          // NavigationService.replaceTo(Flurorouter.convocatoriaRoute);
           return DashboardDocenteLayout(child: child!);
         } else {
           return AuthLayout(child: child!);

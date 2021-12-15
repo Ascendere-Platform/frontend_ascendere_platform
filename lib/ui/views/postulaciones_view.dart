@@ -9,14 +9,14 @@ import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_
 
 import 'package:frontend_ascendere_platform/ui/cards/cards_convocatorias.dart';
 
-class ConvocatoriasView extends StatefulWidget {
-  const ConvocatoriasView({Key? key}) : super(key: key);
+class PostulacionesView extends StatefulWidget {
+  const PostulacionesView({Key? key}) : super(key: key);
 
   @override
-  State<ConvocatoriasView> createState() => _ConvocatoriasViewState();
+  State<PostulacionesView> createState() => _PostulacionesViewState();
 }
 
-class _ConvocatoriasViewState extends State<ConvocatoriasView> {
+class _PostulacionesViewState extends State<PostulacionesView> {
   @override
   Widget build(BuildContext context) {
     final convocatoriasProvider = Provider.of<ConvocatoriaProvider>(context);
@@ -33,7 +33,7 @@ class _ConvocatoriasViewState extends State<ConvocatoriasView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Convocatorias',
+                'Postulaciones',
                 style: GoogleFonts.quicksand(
                     fontSize: 24,
                     color: const Color(0xFF001B34),
