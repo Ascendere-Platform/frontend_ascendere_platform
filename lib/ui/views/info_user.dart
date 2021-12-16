@@ -157,9 +157,7 @@ class _UserViewForm extends StatelessWidget {
             TextFormField(
               initialValue: user.banner,
               decoration: CustomInputs.formInputDecoration(
-                  hint: 'Link del banner',
-                  label: 'Banner',
-                  icon: Icons.image),
+                  hint: 'Link del banner', label: 'Banner', icon: Icons.image),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Ingrese un banner';
@@ -242,7 +240,7 @@ class _AvatarContainer extends StatelessWidget {
             height: 120,
             width: 120,
             placeholder: 'assets/avatar_temp.png',
-            image: user.avatar,
+            image: user.avatar!,
             fit: BoxFit.cover,
           );
 

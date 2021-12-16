@@ -1,13 +1,9 @@
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import 'package:frontend_ascendere_platform/services/navigation_service.dart';
+import 'package:frontend_ascendere_platform/providers/postulaciones/postulaciones_provider.dart';
 
-import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
-
-import 'package:frontend_ascendere_platform/ui/cards/cards_convocatorias.dart';
+import 'package:frontend_ascendere_platform/datatables/postulaciones_datasource.dart';
 
 class PostulacionesView extends StatefulWidget {
   const PostulacionesView({Key? key}) : super(key: key);
@@ -19,61 +15,58 @@ class PostulacionesView extends StatefulWidget {
 class _PostulacionesViewState extends State<PostulacionesView> {
   @override
   Widget build(BuildContext context) {
-    final convocatoriasProvider = Provider.of<ConvocatoriaProvider>(context);
-    convocatoriasProvider.getConvocatorias();
+    final postualcionesProvider = Provider.of<PostulacionesProvider>(context);
 
-    final convocatorias = convocatoriasProvider.convocatorias;
+    final postulacionesDataSource =
+        PostualcionesDataSource(postualcionesProvider.postulaciones, context);
 
-    return ListView(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(30),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Postulaciones',
-                style: GoogleFonts.quicksand(
-                    fontSize: 24,
-                    color: const Color(0xFF001B34),
-                    fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: ListView(
+        physics: const ClampingScrollPhysics(),
+        children: [
+          const SizedBox(height: 10),
+          SingleChildScrollView(
+            child: PaginatedDataTable(
+              sortAscending: postualcionesProvider.ascending,
+              sortColumnIndex: postualcionesProvider.sortColumnIndex,
+              columns: [
+                DataColumn(
+                    label: const Text('Nombre del proyecto'),
+                    onSort: (colIndex, _) {
+                      postualcionesProvider.sortColumnIndex = colIndex;
+                      postualcionesProvider
+                          .sort<String>((user) => user.nombreProyecto);
+                    }),
+                const DataColumn(label: Text('Gestor del proyecto')),
+                DataColumn(
+                    label: const Text('Convocatoria'),
+                    onSort: (colIndex, _) {
+                      postualcionesProvider.sortColumnIndex = colIndex;
+                      postualcionesProvider.sort<String>(
+                          (user) => user.convocatoria.nombreConvocatoria);
+                    }),
+                DataColumn(
+                    label: const Text('Tipo de proyecto'),
+                    onSort: (colIndex, _) {
+                      postualcionesProvider.sortColumnIndex = colIndex;
+                      postualcionesProvider.sort<String>(
+                          (user) => user.tipoProyecto.tipoProyecto);
+                    }),
+                const DataColumn(label: Text('Acciones')),
+              ],
+              source: postulacionesDataSource,
+              onRowsPerPageChanged: (value) {
+                setState(() {});
+              },
+              header: const Text(
+                'Listado de Postualciones',
+                maxLines: 2,
               ),
-              const SizedBox(height: 30),
-              Wrap(
-                spacing: 5,
-                children: List.generate(
-                  convocatorias.length,
-                  (index) {
-                    return Material(
-                      // borderRadius: const BorderRadius.all(Radius.circular(4)),
-                      // elevation: 3,
-                      child: InkWell(
-                        onTap: () {
-                          NavigationService.naviageTo(
-                              '/dashboard/convocatorias/${convocatorias[index].id}');
-                        },
-                        child: CardConvocatorias(
-                          state: convocatorias[index].estado,
-                          title: convocatorias[index].nombreConvocatoria,
-                          child: Text(
-                            DateFormat('EEEE, MMMM dd')
-                                .format(convocatorias[index].fechaCreacion),
-                            style: GoogleFonts.quicksand(
-                              fontSize: 14,
-                            ),
-                          ),
-                          // width: 225,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

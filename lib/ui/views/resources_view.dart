@@ -36,6 +36,8 @@ class _ResourcesViewState extends State<ResourcesView> {
           const SizedBox(height: 10),
           SingleChildScrollView(
             child: PaginatedDataTable(
+              sortAscending: resourcesProvider.ascending,
+              sortColumnIndex: resourcesProvider.sortColumnIndex,
               columns: [
                 const DataColumn(label: Text('Imagen')),
                 DataColumn(

@@ -24,7 +24,7 @@ class UsersDataSource extends DataTableSource {
             placeholder: 'assets/no-image.jpg',
             width: 40,
             height: 40,
-            image: user.avatar,
+            image: user.avatar!,
             fit: BoxFit.cover,
           );
 

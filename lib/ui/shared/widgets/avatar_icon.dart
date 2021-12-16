@@ -29,7 +29,7 @@ class AvatarIcon extends StatelessWidget {
               )
             : FadeInImage.assetNetwork(
                 placeholder: 'assets/avatar_temp.png',
-                image: profile.avatar,
+                image: profile.avatar!,
                 fit: BoxFit.cover,
               );
 

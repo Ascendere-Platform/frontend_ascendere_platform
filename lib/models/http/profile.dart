@@ -7,7 +7,7 @@ class Profile {
     required this.nombre,
     required this.fechaNacimiento,
     required this.email,
-    required this.avatar,
+    this.avatar,
     this.banner,
     this.biografia,
     this.ubicacion,
@@ -19,7 +19,7 @@ class Profile {
   String nombre;
   DateTime fechaNacimiento;
   String email;
-  String avatar;
+  String? avatar;
   String? banner;
   String? biografia;
   String? ubicacion;
@@ -35,7 +35,7 @@ class Profile {
         nombre: json["nombre"],
         fechaNacimiento: DateTime.parse(json["fechaNacimiento"]),
         email: json["email"],
-        avatar: json["avatar"],
+        avatar: json["avatar"] ?? '',
         banner: json["banner"] ?? '',
         biografia: json["biografia"] ?? '',
         ubicacion: json["ubicacion"] ?? '',
