@@ -25,5 +25,6 @@ class ProfileProvider extends ChangeNotifier {
     profile = Profile.fromJson(resp);
 
     notifyListeners();
+    return profile;
   }
 }

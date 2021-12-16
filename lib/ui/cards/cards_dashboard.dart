@@ -8,12 +8,14 @@ class CardDashboard extends StatelessWidget {
     required this.child,
     this.width,
     this.icon,
+    this.hasMargin = true,
   }) : super(key: key);
 
   final String? title;
   final Widget child;
   final double? width;
   final IconData? icon;
+  final bool hasMargin;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class CardDashboard extends StatelessWidget {
 
     return Container(
       width: width,
-      margin: (size.width > 1000)
+      margin: (size.width > 1000 && hasMargin)
           ? const EdgeInsets.symmetric(horizontal: 200)
           : null,
       padding: const EdgeInsets.all(10),
