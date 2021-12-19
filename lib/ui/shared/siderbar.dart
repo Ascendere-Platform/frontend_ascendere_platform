@@ -71,13 +71,12 @@ class Sidebar extends StatelessWidget {
             icon: Icons.playlist_add_check,
             onPressed: () => navigateTo(Flurorouter.postulacionesRoute),
           ),
-          // MenuItem(
-          //   text: 'Proyectos Aprobados',
-          //   icon: Icons.check,
-          //   isActive:
-          //       sideMenuProvider.currentPage == Flurorouter.convocatoriasRoute,
-          //   onPressed: () => navigateTo(Flurorouter.convocatoriasRoute),
-          // ),
+          MenuItem(
+            text: 'Proyectos Aprobados',
+            icon: Icons.check,
+            isActive: sideMenuProvider.currentPage == Flurorouter.projectsRoute,
+            onPressed: () => navigateTo(Flurorouter.projectsRoute),
+          ),
           const SizedBox(height: 50),
           // const Spacer(),
           const TextSeparator(text: 'Administrador'),

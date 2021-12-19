@@ -28,6 +28,8 @@ class Flurorouter {
   static String usersSettingsRoute = '/dashboard/user-settings';
 
   static String postulacionesRoute = '/dashboard/postulaciones';
+  static String postulacionRoute = '/dashboard/postulaciones/:uid';
+  static String projectsRoute = '/dashboard/projects';
 
   // Dashboard Docentes
   static String convocatoriasLastRoute =
@@ -74,6 +76,14 @@ class Flurorouter {
 
     router.define(postulacionesRoute,
         handler: DashboardHandlers.postulaciones,
+        transitionType: TransitionType.fadeIn);
+
+    router.define(postulacionRoute,
+        handler: DashboardHandlers.postulacion,
+        transitionType: TransitionType.fadeIn);
+
+    router.define(projectsRoute,
+        handler: DashboardHandlers.projects,
         transitionType: TransitionType.fadeIn);
 
     // Dashboard Docentes

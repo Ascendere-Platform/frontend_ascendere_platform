@@ -78,7 +78,7 @@ class _UserModalState extends State<UserModal> {
 
                 // Types Projects
                 CardDashboard(
-                  title: 'Roles',
+                  title: 'Rol del usuario',
                   child: Column(children: [
                     Wrap(
                       spacing: 5,

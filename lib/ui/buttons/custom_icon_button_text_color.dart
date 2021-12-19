@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomIconButtonText extends StatelessWidget {
-  const CustomIconButtonText({
+class CustomIconButtonTextColor extends StatelessWidget {
+  const CustomIconButtonTextColor({
     Key? key,
     required this.onPressed,
     required this.text,
@@ -23,9 +23,7 @@ class CustomIconButtonText extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         // shape: MaterialStateProperty.all(const StadiumBorder()),
-        backgroundColor: disable
-            ? MaterialStateProperty.all(Colors.grey)
-            : MaterialStateProperty.all(color),
+        backgroundColor: MaterialStateProperty.all(Colors.grey),
       ),
       onPressed: disable ? null : () => onPressed(),
       child: Padding(
@@ -33,7 +31,9 @@ class CustomIconButtonText extends StatelessWidget {
         child: Row(
           children: [
             Icon(icon, color: Colors.white),
-            const SizedBox(width: 8,),
+            const SizedBox(
+              width: 8,
+            ),
             Text(
               text,
               style: const TextStyle(color: Colors.white),

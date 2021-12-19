@@ -6,7 +6,6 @@ import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
 import 'package:frontend_ascendere_platform/providers/user_form_provider.dart';
 
 import 'package:frontend_ascendere_platform/services/navigation_service.dart';
-import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 
 import 'package:frontend_ascendere_platform/models/http/profile.dart';
 
@@ -86,18 +85,31 @@ class _UserViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      columnWidths: const {0: FixedColumnWidth(250)},
-      children: [
-        TableRow(children: [
-          const _AvatarContainer(),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 42),
-            child: const _UserViewForm(),
-          ),
-        ])
-      ],
-    );
+    final size = MediaQuery.of(context).size;
+
+    return (size.width > 900)
+        ? Table(
+            columnWidths: const {0: FixedColumnWidth(250)},
+            children: [
+              TableRow(children: [
+                const _AvatarContainer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 42),
+                  child: const _UserViewForm(),
+                ),
+              ])
+            ],
+          )
+        : SizedBox(
+            height: 840,
+            child: Column(
+              children: const [
+                _AvatarContainer(),
+                SizedBox(height: 24),
+                _UserViewForm(),
+              ],
+            ),
+          );
   }
 }
 

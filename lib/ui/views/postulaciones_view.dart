@@ -5,6 +5,8 @@ import 'package:frontend_ascendere_platform/providers/postulaciones/postulacione
 
 import 'package:frontend_ascendere_platform/datatables/postulaciones_datasource.dart';
 
+import 'package:frontend_ascendere_platform/ui/labels/custom_labels.dart';
+
 class PostulacionesView extends StatefulWidget {
   const PostulacionesView({Key? key}) : super(key: key);
 
@@ -25,6 +27,11 @@ class _PostulacionesViewState extends State<PostulacionesView> {
       child: ListView(
         physics: const ClampingScrollPhysics(),
         children: [
+          Text(
+            'Gestionar Postulaciones',
+            style: CustomLabels.h1,
+          ),
+          const SizedBox(height: 10),
           const SizedBox(height: 10),
           SingleChildScrollView(
             child: PaginatedDataTable(
@@ -53,16 +60,19 @@ class _PostulacionesViewState extends State<PostulacionesView> {
                       postualcionesProvider.sort<String>(
                           (user) => user.tipoProyecto.tipoProyecto);
                     }),
+                DataColumn(
+                    label: const Text('Estado'),
+                    onSort: (colIndex, _) {
+                      postualcionesProvider.sortColumnIndex = colIndex;
+                      postualcionesProvider
+                          .sort<String>((user) => user.estado.toString());
+                    }),
                 const DataColumn(label: Text('Acciones')),
               ],
               source: postulacionesDataSource,
               onRowsPerPageChanged: (value) {
                 setState(() {});
               },
-              header: const Text(
-                'Listado de Postualciones',
-                maxLines: 2,
-              ),
             ),
           ),
         ],

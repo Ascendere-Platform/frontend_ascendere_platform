@@ -6,7 +6,9 @@ import 'package:frontend_ascendere_platform/router/router.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
 
+import 'package:frontend_ascendere_platform/ui/views/projects_approved_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/users_view.dart';
+import 'package:frontend_ascendere_platform/ui/views/postulacion_info_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/postulaciones_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/info_user.dart';
 import 'package:frontend_ascendere_platform/ui/views/create_convocatoria_view.dart';
@@ -112,6 +114,34 @@ class DashboardHandlers {
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return const PostulacionesView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler postulacion = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.postulacionRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      if (params['uid']?.first != null) {
+        return PostualcionInfoView(id: params['uid']!.first);
+      } else {
+        return const PostulacionesView();
+      }
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler projects = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.projectsRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const ProjectsApprovedView();
     } else {
       return const LoginView();
     }

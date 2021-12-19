@@ -8,11 +8,13 @@ class PostulacionResponse {
     required this.alcance,
     required this.requerimientos,
     required this.fechaInicio,
-    required this.fechaFin,
+    required this.fechaActualizacion,
+    required this.fechaPublicacion,
     required this.equipo,
     required this.convocatoria,
     required this.mensaje,
     required this.tipoProyecto,
+    this.estado,
   });
 
   String id;
@@ -21,11 +23,13 @@ class PostulacionResponse {
   String alcance;
   String requerimientos;
   DateTime fechaInicio;
-  DateTime fechaFin;
+  DateTime fechaActualizacion;
   List<Equipo> equipo;
   Convocatoria convocatoria;
   String mensaje;
   TipoProyecto tipoProyecto;
+  DateTime? fechaPublicacion;
+  bool? estado;
 
   factory PostulacionResponse.fromJson(String str) =>
       PostulacionResponse.fromMap(json.decode(str));
@@ -40,11 +44,13 @@ class PostulacionResponse {
         alcance: json["alcance"],
         requerimientos: json["requerimientos"],
         fechaInicio: DateTime.parse(json["fechaInicio"]),
-        fechaFin: DateTime.parse(json["fechaFin"]),
+        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+        fechaPublicacion: DateTime.parse(json["fechaPublicacion"]),
         equipo: List<Equipo>.from(json["equipo"].map((x) => Equipo.fromMap(x))),
         convocatoria: Convocatoria.fromMap(json["convocatoria"]),
         mensaje: json["mensaje"],
         tipoProyecto: TipoProyecto.fromMap(json["tipoProyecto"]),
+        estado: json["estado"] ?? false,
       );
 
   Map<String, dynamic> toMap() => {
@@ -54,11 +60,12 @@ class PostulacionResponse {
         "alcance": alcance,
         "requerimientos": requerimientos,
         "fechaInicio": fechaInicio.toIso8601String(),
-        "fechaFin": fechaFin.toIso8601String(),
+        "fechaActualizacion": fechaActualizacion.toIso8601String(),
         "equipo": List<dynamic>.from(equipo.map((x) => x.toMap())),
         "convocatoria": convocatoria.toMap(),
         "mensaje": mensaje,
         "tipoProyecto": tipoProyecto.toMap(),
+        "estado": estado,
       };
 }
 
@@ -202,10 +209,10 @@ class Asignatura {
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "nombreAsignatura": nombreAsignatura == null ? null : nombreAsignatura,
-        "modalidad": modalidad == null ? null : modalidad,
-        "facultadid": facultadid == null ? null : facultadid,
-        "periodo": periodo == null ? null : periodo,
+        "nombreAsignatura": nombreAsignatura,
+        "modalidad": modalidad,
+        "facultadid": facultadid,
+        "periodo": periodo,
       };
 }
 

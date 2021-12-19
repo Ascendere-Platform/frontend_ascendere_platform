@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_ascendere_platform/providers/postulaciones/cronograma_provider.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 
@@ -63,6 +64,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ResourcesFormProvider()),
         ChangeNotifierProvider(create: (_) => UserFormProvider()),
         ChangeNotifierProvider(create: (_) => PostulacionesProvider()),
+        ChangeNotifierProvider(create: (_) => CronogramaProvider()),
       ],
       child: const MyApp(),
     );

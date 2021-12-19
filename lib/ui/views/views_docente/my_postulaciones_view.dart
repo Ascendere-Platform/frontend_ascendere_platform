@@ -1,13 +1,8 @@
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:frontend_ascendere_platform/services/navigation_service.dart';
-
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
-
-import 'package:frontend_ascendere_platform/ui/cards/cards_convocatorias.dart';
 
 class MyPostulacionView extends StatefulWidget {
   const MyPostulacionView({Key? key}) : super(key: key);
@@ -21,8 +16,6 @@ class _MyPostulacionViewState extends State<MyPostulacionView> {
   Widget build(BuildContext context) {
     final convocatoriasProvider = Provider.of<ConvocatoriaProvider>(context);
     convocatoriasProvider.getConvocatorias();
-
-    final convocatorias = convocatoriasProvider.convocatorias;
 
     return ListView(
       children: [

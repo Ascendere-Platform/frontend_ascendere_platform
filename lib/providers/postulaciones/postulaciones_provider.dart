@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:frontend_ascendere_platform/api/micro_postulaciones.dart';
 
-import 'package:frontend_ascendere_platform/api/micro_resources.dart';
 import 'package:frontend_ascendere_platform/models/http/postualcion_response.dart';
+import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 
 class PostulacionesProvider extends ChangeNotifier {
   late GlobalKey<FormState> formKey;
@@ -32,6 +32,37 @@ class PostulacionesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  getPostulacionId(String id) async {
+    try {
+      final resp = await MicroPostulaciones.get('buscarPostulacion?id=$id');
+      final conv = PostulacionResponse.fromJson(resp);
+      return conv;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  approvedPostulacion(String id) async {
+    final data = {
+      "_id": id,
+      "estado": true,
+    };
+
+    try {
+      MicroPostulaciones.putData('publicarPostulacion', data).then((resp) {
+        NotificationsService.showSnackbar('Proyecto aprobado');
+        return true;
+      }).catchError((e) {
+        NotificationsService.showSnackbarError('Proyecto no aprobado, $e');
+        return false;
+      });
+      notifyListeners();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   void sort<T>(Comparable<T> Function(PostulacionResponse user) getField) {
     postulaciones.sort((a, b) {
       final aValue = getField(a);
@@ -45,53 +76,5 @@ class PostulacionesProvider extends ChangeNotifier {
     ascending = !ascending;
 
     notifyListeners();
-  }
-
-  registerResource(String name, String img, int quantity, String typeId) async {
-    final data = {
-      "nombreRecurso": name,
-      "cantidadExistente": quantity,
-      "imagen": img,
-      "tipoid": typeId,
-    };
-
-    try {
-      await MicroResources.post('registroRecurso', data);
-      getPostulaciones();
-      notifyListeners();
-    } catch (e) {
-      throw 'Error al crear el recurso';
-    }
-  }
-
-  updateResource(
-      String id, String name, String img, int quantity, String typeId) async {
-    final data = {
-      "id": id,
-      "nombreRecurso": name,
-      "cantidadExistente": quantity,
-      "imagen": img,
-      "tipoid": typeId,
-    };
-
-    try {
-      await MicroResources.put('actualizarRecurso', data);
-      getPostulaciones();
-      notifyListeners();
-    } catch (e) {
-      throw 'Error al crear el recurso';
-    }
-  }
-
-  Future deleteResource(String id) async {
-    try {
-      await MicroResources.delete('/eliminarRecurso?id=$id');
-
-      postulaciones.removeWhere((categoria) => categoria.id == id);
-
-      notifyListeners();
-    } catch (e) {
-      throw 'Error al eliminar categoria';
-    }
   }
 }
