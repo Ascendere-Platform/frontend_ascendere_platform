@@ -12,6 +12,7 @@ import 'package:frontend_ascendere_platform/models/http/convocatoria_register.da
 class ConvocatoriaProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   ConvocatoriaRegister? convocatoriaRegister;
+  List<ConvocatoriaResponse> lastConvocatoria = [];
   List<ConvocatoriaResponse> convocatorias = [];
   List<TiposProyecto> typesProjets = [];
   List<AnexosConvocatoria> anexos = [];
@@ -42,6 +43,7 @@ class ConvocatoriaProvider extends ChangeNotifier {
     getLines();
     getExpectedResults();
     getRubrics();
+    getLastConvocatorias();
   }
 
   getConvocatorias() async {
@@ -66,6 +68,16 @@ class ConvocatoriaProvider extends ChangeNotifier {
     } catch (e) {
       return null;
     }
+  }
+
+  getLastConvocatorias() async {
+    final resp = await MicroConvocatorias.get('/ultimaConvocatoria');
+
+    lastConvocatoria.add(ConvocatoriaResponse.fromMap(json.decode(resp)));
+
+    isLoading = false;
+
+    notifyListeners();
   }
 
   Future newConvocatoria() async {

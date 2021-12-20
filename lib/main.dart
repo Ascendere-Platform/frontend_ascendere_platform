@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_ascendere_platform/providers/postulaciones/cronograma_provider.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 
 import 'package:frontend_ascendere_platform/router/router.dart';
 
+import 'package:frontend_ascendere_platform/providers/postulaciones/cronograma_provider.dart';
+import 'package:frontend_ascendere_platform/providers/postulaciones/postualciones_form_provider.dart';
 import 'package:frontend_ascendere_platform/providers/postulaciones/postulaciones_provider.dart';
 import 'package:frontend_ascendere_platform/providers/user_form_provider.dart';
 import 'package:frontend_ascendere_platform/providers/resources_form_provider.dart';
@@ -65,6 +66,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UserFormProvider()),
         ChangeNotifierProvider(create: (_) => PostulacionesProvider()),
         ChangeNotifierProvider(create: (_) => CronogramaProvider()),
+        ChangeNotifierProvider(create: (_) => PostulacionesFormProvider()),
       ],
       child: const MyApp(),
     );

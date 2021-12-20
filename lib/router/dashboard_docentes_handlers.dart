@@ -1,4 +1,5 @@
 import 'package:fluro/fluro.dart';
+import 'package:frontend_ascendere_platform/ui/views/views_docente/info_last_convocatoria.view.dart';
 import 'package:frontend_ascendere_platform/ui/views/views_docente/my_postulaciones_view.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +9,7 @@ import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 
 import 'package:frontend_ascendere_platform/ui/views/views_docente/network_docente_view.dart';
-import 'package:frontend_ascendere_platform/ui/views/views_docente/postulacion._view.dart';
+import 'package:frontend_ascendere_platform/ui/views/views_docente/postulacion_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/views_docente/last_convocatoria_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/login_view.dart';
 
@@ -20,6 +21,22 @@ class DashboardDocentesHandlers {
 
     if (authProvider.authStatus == AuthStatus.authenticated) {
       return const LastConvocatoriasView();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler convocatoriaLastInfo = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.convocatoriaRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      if (params['uid']?.first != null) {
+        return ConvocatoriaInfoView(id: params['uid']!.first);
+      } else {
+        return const LastConvocatoriasView();
+      }
     } else {
       return const LoginView();
     }

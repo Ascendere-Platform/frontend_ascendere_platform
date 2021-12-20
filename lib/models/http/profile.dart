@@ -27,6 +27,8 @@ class Profile {
 
   factory Profile.fromJson(String str) => Profile.fromMap(json.decode(str));
 
+  get nombreRecurso => null;
+
   String toJson() => json.encode(toMap());
 
   factory Profile.fromMap(Map<String, dynamic> json) => Profile(

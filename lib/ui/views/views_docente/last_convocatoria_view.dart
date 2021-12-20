@@ -20,9 +20,8 @@ class _LastConvocatoriasViewState extends State<LastConvocatoriasView> {
   @override
   Widget build(BuildContext context) {
     final convocatoriasProvider = Provider.of<ConvocatoriaProvider>(context);
-    convocatoriasProvider.getConvocatorias();
 
-    final convocatorias = convocatoriasProvider.convocatorias;
+    final convocatorias = convocatoriasProvider.lastConvocatoria;
 
     return ListView(
       children: [
@@ -51,7 +50,7 @@ class _LastConvocatoriasViewState extends State<LastConvocatoriasView> {
                       child: InkWell(
                         onTap: () {
                           NavigationService.naviageTo(
-                              '/dashboard/convocatorias/${convocatorias[index].id}');
+                              '/dashboard/docentes/convocatoria-vigente/${convocatorias[index].id}');
                         },
                         child: CardConvocatorias(
                           state: convocatorias[index].estado,

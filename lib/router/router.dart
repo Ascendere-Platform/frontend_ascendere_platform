@@ -37,6 +37,8 @@ class Flurorouter {
   static String postularRoute = '/dashboard/docentes/postular';
   static String mypostulacionesRoute = '/dashboard/docentes/mis-postualciones';
   static String networkDocente = '/dashboard/docentes/red-docentes';
+  static String convocatoriasLastRouteInfo =
+      '/dashboard/docentes/convocatoria-vigente/:uid';
 
   static void configureRoutes() {
     // Auth Routes
@@ -89,6 +91,10 @@ class Flurorouter {
     // Dashboard Docentes
     router.define(convocatoriasLastRoute,
         handler: DashboardDocentesHandlers.convocatoriaLast,
+        transitionType: TransitionType.fadeIn);
+
+    router.define(convocatoriasLastRouteInfo,
+        handler: DashboardDocentesHandlers.convocatoriaLastInfo,
         transitionType: TransitionType.fadeIn);
 
     router.define(postularRoute,

@@ -75,6 +75,7 @@ class OptionsAvatar extends StatelessWidget {
             isActive: false,
             onPressed: () {
               OptionsAvatarProvider.closeMenu();
+              NavigationService.replaceTo(Flurorouter.dashboardRoute);
               Provider.of<AuthProvider>(context, listen: false).logout();
             },
           ),

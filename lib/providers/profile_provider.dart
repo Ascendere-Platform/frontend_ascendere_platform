@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_ascendere_platform/models/http/state_response.dart';
+import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'package:frontend_ascendere_platform/api/micro_users.dart';
@@ -10,6 +12,7 @@ import 'package:frontend_ascendere_platform/models/user.dart';
 
 class ProfileProvider extends ChangeNotifier {
   Profile? profile;
+  bool? hasFollow;
 
   ProfileProvider() {
     getProfile();
@@ -26,5 +29,35 @@ class ProfileProvider extends ChangeNotifier {
 
     notifyListeners();
     return profile;
+  }
+
+  followDocente(String id) async {
+    final data = {"email": "2test@ejemplo.com", "password": "123456"};
+    try {
+      MicroUsers.follow('seguirUsuario?id=619d4c247ee57a61c58f1d36')
+          .then((resp) {
+        NotificationsService.showSnackbar('Siguiendo a nuevo docente');
+        return true;
+      }).catchError((e) {
+        NotificationsService.showSnackbarError(
+            'No puede seguir al docente, $e');
+        return false;
+      });
+      notifyListeners();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  hasFollowDocente(String id) async {
+    try {
+      final resp = await MicroUsers.get('consultoRelacion?id=$id');
+      hasFollow = Status.fromJson(resp).status;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

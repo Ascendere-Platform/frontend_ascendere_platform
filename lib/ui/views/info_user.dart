@@ -215,19 +215,20 @@ class _UserViewForm extends StatelessWidget {
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 120),
               child: ElevatedButton(
-                  onPressed: () async {
-                    await userFormProvider.updateUser();
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.indigo),
-                    shadowColor: MaterialStateProperty.all(Colors.indigo),
-                  ),
-                  child: Row(
-                    children: const [
-                      Icon(Icons.save_outlined),
-                      Text(' Guardar'),
-                    ],
-                  )),
+                onPressed: () async {
+                  await userFormProvider.updateUser();
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.indigo),
+                  shadowColor: MaterialStateProperty.all(Colors.indigo),
+                ),
+                child: Row(
+                  children: const [
+                    Icon(Icons.save_outlined),
+                    Text(' Guardar'),
+                  ],
+                ),
+              ),
             )
           ],
         ),
