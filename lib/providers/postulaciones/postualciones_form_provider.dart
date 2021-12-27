@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:frontend_ascendere_platform/api/micro_convocatorias.dart';
+import 'package:frontend_ascendere_platform/api/micro_postulaciones.dart';
 
 import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 
@@ -33,15 +33,24 @@ class PostulacionesFormProvider extends ChangeNotifier {
       "justificacion": justificacion,
       "alcance": alcance,
       "requerimientos": requerimientos,
-      "equipo": equipo,
+      "equipo": [
+        {
+          "id": "619d4c914d53f321a7b2e1bd",
+          "asignaturaID": "619568b34f1b2b2c8ee8c9d9",
+          "cargo": "Desarrollador"
+        },
+        {
+          "id": "619d4c247ee57a61c58f1d36",
+          "asignaturaID": "619568b34f1b2b2c8ee8c9d9",
+          "cargo": "Ing"
+        }
+      ],
       "convocatoriaID": convocatoriaId,
       "tipoProyectoId": tipoProyectoId
     };
 
-    print(data);
-
     try {
-      MicroConvocatorias.put('/registrarPostulacion', data).then((resp) {
+      MicroPostulaciones.post('/registrarPostulacion', data).then((resp) {
         NotificationsService.showSnackbar('Postualción registrada');
         return true;
       }).catchError((e) {

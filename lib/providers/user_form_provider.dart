@@ -46,7 +46,7 @@ class UserFormProvider extends ChangeNotifier {
     };
 
     try {
-      MicroUsers.putData('modificarPerfil', data).then((resp) {
+      MicroUsers.putData('/modificarPerfil', data).then((resp) {
         NotificationsService.showSnackbar('Usuario actualizado');
         return true;
       }).catchError((e) {

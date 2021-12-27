@@ -9,7 +9,7 @@ import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
 import 'package:frontend_ascendere_platform/providers/sidemenu_provider.dart';
 
 import 'package:frontend_ascendere_platform/ui/views/views_docente/network_docente_view.dart';
-import 'package:frontend_ascendere_platform/ui/views/views_docente/postulacion_view.dart';
+import 'package:frontend_ascendere_platform/ui/views/views_docente/create_postulacion_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/views_docente/last_convocatoria_view.dart';
 import 'package:frontend_ascendere_platform/ui/views/login_view.dart';
 

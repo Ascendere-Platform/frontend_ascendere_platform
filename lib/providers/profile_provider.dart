@@ -32,10 +32,9 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   followDocente(String id) async {
-    final data = {"email": "2test@ejemplo.com", "password": "123456"};
+    // final data = {"email": "2test@ejemplo.com", "password": "123456"};
     try {
-      MicroUsers.follow('seguirUsuario?id=619d4c247ee57a61c58f1d36')
-          .then((resp) {
+      MicroUsers.follow('/seguirUsuario?id=$id').then((resp) {
         NotificationsService.showSnackbar('Siguiendo a nuevo docente');
         return true;
       }).catchError((e) {
@@ -52,7 +51,7 @@ class ProfileProvider extends ChangeNotifier {
 
   hasFollowDocente(String id) async {
     try {
-      final resp = await MicroUsers.get('consultoRelacion?id=$id');
+      final resp = await MicroUsers.get('/consultoRelacion?id=$id');
       hasFollow = Status.fromJson(resp).status;
       notifyListeners();
       return true;

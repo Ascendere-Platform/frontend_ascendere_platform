@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_ascendere_platform/models/http/postualcion_response.dart';
 import 'package:frontend_ascendere_platform/providers/profile_provider.dart';
 import 'package:frontend_ascendere_platform/ui/cards/cards_projects.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +15,19 @@ class MyPostulacionView extends StatefulWidget {
 }
 
 class _MyPostulacionViewState extends State<MyPostulacionView> {
+  late List<PostulacionResponse> projects;
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<PostulacionesProvider>(context, listen: false)
+        .getPostulaciones();
+  }
+
   @override
   Widget build(BuildContext context) {
     final postualcionesProvider = Provider.of<PostulacionesProvider>(context);
-    postualcionesProvider.getPostulaciones();
+    // postualcionesProvider.getPostulaciones();
 
     final profileProvider = Provider.of<ProfileProvider>(context);
 

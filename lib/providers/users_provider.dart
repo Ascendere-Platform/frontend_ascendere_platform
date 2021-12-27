@@ -82,7 +82,7 @@ class UsersProvider extends ChangeNotifier {
 
   updateRol(String id, String? idRol) async {
     try {
-      await MicroUsers.put('modificarRol?iduser=$id&idrol=$idRol');
+      await MicroUsers.put('/modificarRol?iduser=$id&idrol=$idRol');
       getPaginatedUsers();
       notifyListeners();
     } catch (e) {

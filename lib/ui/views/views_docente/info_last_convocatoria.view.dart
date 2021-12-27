@@ -137,7 +137,7 @@ class _InfoPostualcionView extends StatelessWidget {
                 (size.width > 700) ? const {0: FixedColumnWidth(200)} : null,
             children: [
               TableRow(children: [
-                const TittleTableRow(text: 'Nombre del proyecto'),
+                const TittleTableRow(text: 'Nombre'),
                 ContentTableRow(text: conv.nombreConvocatoria),
               ]),
               TableRow(children: [

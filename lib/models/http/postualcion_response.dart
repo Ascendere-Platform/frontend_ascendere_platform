@@ -20,7 +20,7 @@ class PostulacionResponse {
   String id;
   String nombreProyecto;
   String justificacion;
-  String alcance;
+  String? alcance;
   String requerimientos;
   DateTime fechaInicio;
   DateTime fechaActualizacion;
@@ -41,7 +41,7 @@ class PostulacionResponse {
         id: json["id"],
         nombreProyecto: json["nombreProyecto"],
         justificacion: json["justificacion"],
-        alcance: json["alcance"],
+        alcance: json["alcance"] ?? '',
         requerimientos: json["requerimientos"],
         fechaInicio: DateTime.parse(json["fechaInicio"]),
         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
@@ -148,14 +148,14 @@ class Equipo {
     required this.id,
     required this.nombre,
     required this.email,
-    required this.cargo,
+    this.cargo,
     this.asignatura,
   });
 
   String id;
   String nombre;
   String email;
-  String cargo;
+  String? cargo;
   Asignatura? asignatura;
 
   factory Equipo.fromJson(String str) => Equipo.fromMap(json.decode(str));
@@ -167,7 +167,7 @@ class Equipo {
         nombre: json["nombre"],
         email: json["email"],
         asignatura: Asignatura.fromMap(json["asignatura"] ?? ''),
-        cargo: json["cargo"],
+        cargo: json["cargo"] ?? '',
       );
 
   Map<String, dynamic> toMap() => {

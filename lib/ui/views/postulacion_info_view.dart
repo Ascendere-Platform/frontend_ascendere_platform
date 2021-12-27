@@ -241,7 +241,7 @@ class _InfoPostualcionView extends StatelessWidget {
               TableRow(children: [
                 const TittleTableRow(text: 'Alcance'),
                 ContentTableRow(
-                  text: postu.alcance,
+                  text: postu.alcance!,
                 ),
               ]),
               // TableRow(children: [

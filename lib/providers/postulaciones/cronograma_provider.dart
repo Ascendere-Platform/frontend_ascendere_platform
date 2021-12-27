@@ -15,7 +15,7 @@ class CronogramaProvider extends ChangeNotifier {
     // 61b1d9ad555438d1c76aa9sdsdsasd6
 
     try {
-      final resp = await MicroPostulaciones.get('listarHitos?id=$id');
+      final resp = await MicroPostulaciones.get('/listarHitos?id=$id');
 
       if (resp != null) {
         List<dynamic> list = json.decode(resp);
@@ -34,7 +34,7 @@ class CronogramaProvider extends ChangeNotifier {
 
   getPostulacionId(String id) async {
     try {
-      final resp = await MicroPostulaciones.get('buscarPostulacion?id=$id');
+      final resp = await MicroPostulaciones.get('/buscarPostulacion?id=$id');
       final conv = PostulacionResponse.fromJson(resp);
       return conv;
     } catch (e) {

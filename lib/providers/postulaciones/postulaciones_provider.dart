@@ -19,7 +19,7 @@ class PostulacionesProvider extends ChangeNotifier {
   }
 
   getPostulaciones() async {
-    final resp = await MicroPostulaciones.get('listarPostulaciones');
+    final resp = await MicroPostulaciones.get('/listarPostulaciones');
     List<dynamic> list = json.decode(resp);
     postulaciones.clear();
 
@@ -34,7 +34,7 @@ class PostulacionesProvider extends ChangeNotifier {
 
   getPostulacionId(String id) async {
     try {
-      final resp = await MicroPostulaciones.get('buscarPostulacion?id=$id');
+      final resp = await MicroPostulaciones.get('/buscarPostulacion?id=$id');
       final conv = PostulacionResponse.fromJson(resp);
       return conv;
     } catch (e) {
@@ -44,12 +44,12 @@ class PostulacionesProvider extends ChangeNotifier {
 
   approvedPostulacion(String id) async {
     final data = {
-      "_id": id,
+      "id": id,
       "estado": true,
     };
 
     try {
-      MicroPostulaciones.putData('publicarPostulacion', data).then((resp) {
+      MicroPostulaciones.putData('/publicarPostulacion', data).then((resp) {
         NotificationsService.showSnackbar('Proyecto aprobado');
         return true;
       }).catchError((e) {

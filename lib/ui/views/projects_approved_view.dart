@@ -15,9 +15,16 @@ class ProjectsApprovedView extends StatefulWidget {
 
 class _ProjectsApprovedViewState extends State<ProjectsApprovedView> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<PostulacionesProvider>(context, listen: false)
+        .getPostulaciones();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final postualcionesProvider = Provider.of<PostulacionesProvider>(context);
-    postualcionesProvider.getPostulaciones();
+    // postualcionesProvider.getPostulaciones();
 
     final projects = postualcionesProvider.postulaciones
         .where((element) => element.estado == true)

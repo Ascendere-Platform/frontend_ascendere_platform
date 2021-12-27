@@ -22,7 +22,7 @@ class AuthProvider extends ChangeNotifier {
   login(String email, String password) async {
     final data = {'email': email, 'password': password};
 
-    MicroUsers.post('login', data).then((resp) {
+    MicroUsers.post('/login', data).then((resp) {
       authStatus = AuthStatus.authenticated;
 
       final authResponse = AuthResponse.fromJson(resp);
@@ -45,7 +45,7 @@ class AuthProvider extends ChangeNotifier {
       'nombre': name,
       'apellidos': lastName,
     };
-    MicroUsers.post('registro', data).then((resp) {
+    MicroUsers.post('/registro', data).then((resp) {
       NotificationsService.showSnackbar(
           'Cuenta creada, ahora puede iniciar sesión con los datos ingresados');
       NavigationService.replaceTo(Flurorouter.loginRoute);

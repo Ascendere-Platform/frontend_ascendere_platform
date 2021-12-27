@@ -115,6 +115,25 @@ class _PostulacionViewState extends State<PostulacionView> {
                       TextFormField(
                         maxLines: 12,
                         decoration: CustomInputs.formInputDashboardDecoration(
+                          hint: 'Alcance del proyecto',
+                          label: 'Alcance',
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Ingrese el alcance del proyecto';
+                          }
+                          if (value.isEmpty) {
+                            return 'El campo no puede estar vacío';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) =>
+                            postulacionProvider.alcance = value,
+                      ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        maxLines: 12,
+                        decoration: CustomInputs.formInputDashboardDecoration(
                           hint: 'Ingrese los requerimientos del proyecto',
                           label: 'Requerimientos',
                         ),

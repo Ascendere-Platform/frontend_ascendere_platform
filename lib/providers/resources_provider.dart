@@ -72,7 +72,7 @@ class ResourcesProvider extends ChangeNotifier {
     };
 
     try {
-      await MicroResources.post('registroRecurso', data);
+      await MicroResources.post('/registroRecurso', data);
       getResources();
       notifyListeners();
     } catch (e) {
@@ -91,7 +91,7 @@ class ResourcesProvider extends ChangeNotifier {
     };
 
     try {
-      await MicroResources.put('actualizarRecurso', data);
+      await MicroResources.put('/actualizarRecurso', data);
       getResources();
       notifyListeners();
     } catch (e) {
