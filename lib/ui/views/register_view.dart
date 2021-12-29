@@ -8,7 +8,7 @@ import 'package:frontend_ascendere_platform/router/router.dart';
 import 'package:frontend_ascendere_platform/providers/auth_provider.dart';
 import 'package:frontend_ascendere_platform/providers/register_form_provider.dart';
 
-import 'package:frontend_ascendere_platform/ui/buttons/custom_outlined.dart';
+import 'package:frontend_ascendere_platform/ui/buttons/custom_outlined_button.dart';
 import 'package:frontend_ascendere_platform/ui/buttons/link_text.dart';
 import 'package:frontend_ascendere_platform/ui/inputs/custom_inputs.dart';
 

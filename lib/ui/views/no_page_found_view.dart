@@ -9,11 +9,14 @@ class NoPageFoundView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Center(
-        child: Text(
-          '404 - Página no encontrada',
-          style: GoogleFonts.montserratAlternates(
-            fontSize: 50,
-            fontWeight: FontWeight.bold,
+        child: FittedBox(
+          fit: BoxFit.contain,
+          child: Text(
+            '404 - Página no encontrada',
+            style: GoogleFonts.montserratAlternates(
+              fontSize: 50,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

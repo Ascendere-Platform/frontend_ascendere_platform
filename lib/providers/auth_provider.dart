@@ -9,13 +9,11 @@ import 'package:frontend_ascendere_platform/services/navigation_service.dart';
 import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 
 import 'package:frontend_ascendere_platform/models/http/auth_response.dart';
-import 'package:frontend_ascendere_platform/models/user.dart';
 
 enum AuthStatus { checking, authenticated, notAuthenticated }
 
 class AuthProvider extends ChangeNotifier {
   AuthStatus authStatus = AuthStatus.checking;
-  User? user;
 
   AuthProvider() {
     isAuthenticated();
@@ -24,11 +22,13 @@ class AuthProvider extends ChangeNotifier {
   login(String email, String password) async {
     final data = {'email': email, 'password': password};
 
-    MicroUsers.post('login', data).then((resp) {
+    MicroUsers.post('/login', data).then((resp) {
       authStatus = AuthStatus.authenticated;
 
       final authResponse = AuthResponse.fromJson(resp);
+
       LocalStorage.prefs.setString('token', authResponse.token);
+
       NavigationService.replaceTo(Flurorouter.dashboardRoute);
 
       notifyListeners();
@@ -45,7 +45,7 @@ class AuthProvider extends ChangeNotifier {
       'nombre': name,
       'apellidos': lastName,
     };
-    MicroUsers.post('registro', data).then((resp) {
+    MicroUsers.post('/registro', data).then((resp) {
       NotificationsService.showSnackbar(
           'Cuenta creada, ahora puede iniciar sesión con los datos ingresados');
       NavigationService.replaceTo(Flurorouter.loginRoute);
