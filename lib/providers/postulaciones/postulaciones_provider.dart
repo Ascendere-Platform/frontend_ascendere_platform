@@ -32,6 +32,18 @@ class PostulacionesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  getPostulacionesId() async {
+    final resp = await MicroPostulaciones.get('/listarPostulaciones');
+    List<dynamic> list = json.decode(resp);
+    List<PostulacionResponse> postulacionesTemp = [];
+
+    for (var postu in list) {
+      postulacionesTemp.add(PostulacionResponse.fromMap(postu));
+    }
+
+    return postulacionesTemp.last.id;
+  }
+
   getPostulacionId(String id) async {
     try {
       final resp = await MicroPostulaciones.get('/buscarPostulacion?id=$id');

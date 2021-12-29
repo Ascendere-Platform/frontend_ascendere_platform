@@ -227,7 +227,7 @@ class TipoProyecto {
   String id;
   String tipoProyecto;
   String descripcionTipo;
-  int presupuesto;
+  num presupuesto;
 
   factory TipoProyecto.fromJson(String str) =>
       TipoProyecto.fromMap(json.decode(str));

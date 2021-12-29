@@ -38,6 +38,7 @@ class ConvocatoriaProvider extends ChangeNotifier {
   List<String> newResource = [];
 
   ConvocatoriaProvider() {
+    print('object');
     getTypes();
     getAnexos();
     getLines();

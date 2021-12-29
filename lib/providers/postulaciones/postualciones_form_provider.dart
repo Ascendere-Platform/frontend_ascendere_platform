@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:frontend_ascendere_platform/api/micro_postulaciones.dart';
@@ -33,18 +35,7 @@ class PostulacionesFormProvider extends ChangeNotifier {
       "justificacion": justificacion,
       "alcance": alcance,
       "requerimientos": requerimientos,
-      "equipo": [
-        {
-          "id": "619d4c914d53f321a7b2e1bd",
-          "asignaturaID": "619568b34f1b2b2c8ee8c9d9",
-          "cargo": "Desarrollador"
-        },
-        {
-          "id": "619d4c247ee57a61c58f1d36",
-          "asignaturaID": "619568b34f1b2b2c8ee8c9d9",
-          "cargo": "Ing"
-        }
-      ],
+      "equipo": equipo.map((player) => player.toJson()).toList(),
       "convocatoriaID": convocatoriaId,
       "tipoProyectoId": tipoProyectoId
     };

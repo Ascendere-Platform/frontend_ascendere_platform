@@ -1,11 +1,16 @@
 import 'package:frontend_ascendere_platform/models/http/postualcion_response.dart';
 import 'package:frontend_ascendere_platform/models/http/postulacion_register.dart';
 import 'package:frontend_ascendere_platform/models/http/profile.dart';
+import 'package:frontend_ascendere_platform/models/meeting.dart';
+import 'package:frontend_ascendere_platform/providers/postulaciones/cronograma_provider.dart';
 import 'package:frontend_ascendere_platform/providers/postulaciones/postualciones_form_provider.dart';
+import 'package:frontend_ascendere_platform/providers/postulaciones/postulaciones_provider.dart';
 import 'package:frontend_ascendere_platform/providers/users_provider.dart';
+import 'package:frontend_ascendere_platform/services/notifications_service.dart';
 import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard.dart';
 import 'package:frontend_ascendere_platform/ui/cards/cards_dashboard_action.dart';
 import 'package:frontend_ascendere_platform/ui/inputs/custom_inputs.dart';
+import 'package:frontend_ascendere_platform/ui/modals/schedule_modal.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
@@ -18,6 +23,7 @@ import 'package:frontend_ascendere_platform/services/navigation_service.dart';
 import 'package:frontend_ascendere_platform/providers/convocatoria/convocatoria_provider.dart';
 
 import 'package:frontend_ascendere_platform/ui/cards/cards_convocatorias.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class PostulacionView extends StatefulWidget {
   const PostulacionView({Key? key}) : super(key: key);
@@ -32,9 +38,15 @@ class _PostulacionViewState extends State<PostulacionView> {
 
   List<dynamic> _selectedUsers = [];
 
+  List<Meeting> meetings = [];
+
   @override
   Widget build(BuildContext context) {
     final postulacionProvider = Provider.of<PostulacionesFormProvider>(context);
+
+    final postualcionesProvider = Provider.of<PostulacionesProvider>(context);
+
+    final cronogramaProvider = Provider.of<CronogramaProvider>(context);
 
     final convocatoriasProvider = Provider.of<ConvocatoriaProvider>(context);
 
@@ -44,12 +56,21 @@ class _PostulacionViewState extends State<PostulacionView> {
 
     final users = usersProvider.users;
 
+    meetings = cronogramaProvider.meetings;
+
     final typesProjects = convocatoriasProvider.typesProjets;
 
     final _itemsUsers = users
         .map((resource) => MultiSelectItem<Profile>(
             resource, resource.nombre + ' (' + resource.email + ')'))
         .toList();
+
+    final List<CalendarView> _allowedViews = <CalendarView>[
+      CalendarView.day,
+      CalendarView.week,
+      CalendarView.workWeek,
+      CalendarView.month
+    ];
 
     return ListView(
       children: [
@@ -72,7 +93,7 @@ class _PostulacionViewState extends State<PostulacionView> {
                 const SizedBox(height: 30),
                 // Basics
                 CardDashboard(
-                  title: 'Información basica',
+                  title: 'Información básica',
                   child: Column(
                     children: [
                       TextFormField(
@@ -113,7 +134,7 @@ class _PostulacionViewState extends State<PostulacionView> {
                       ),
                       const SizedBox(height: 12),
                       TextFormField(
-                        maxLines: 12,
+                        maxLines: 5,
                         decoration: CustomInputs.formInputDashboardDecoration(
                           hint: 'Alcance del proyecto',
                           label: 'Alcance',
@@ -215,6 +236,26 @@ class _PostulacionViewState extends State<PostulacionView> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                CardDashboardAction(
+                  onPressed: () => const ScheduleModal(),
+                  title: 'Cronograma',
+                  child: SizedBox(
+                    height: 700,
+                    child: SfCalendar(
+                      allowedViews: _allowedViews,
+                      view: CalendarView.month,
+                      showDatePickerButton: true,
+                      dataSource: _getCalendarDataSource(),
+                      monthViewSettings: const MonthViewSettings(
+                          appointmentDisplayMode:
+                              MonthAppointmentDisplayMode.appointment,
+                          appointmentDisplayCount: 3),
+                      // onTap: calendarTapCallback,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     const Spacer(),
@@ -222,6 +263,12 @@ class _PostulacionViewState extends State<PostulacionView> {
                       constraints: const BoxConstraints(maxWidth: 200),
                       child: ElevatedButton(
                           onPressed: () async {
+                            if (meetings.isEmpty) {
+                              NotificationsService.showSnackbarError(
+                                  'Ingrese los hitos del proyecto');
+                              return;
+                            }
+
                             postulacionProvider.convocatoriaId =
                                 convocatoriasLast[0].id;
 
@@ -230,7 +277,18 @@ class _PostulacionViewState extends State<PostulacionView> {
                                   .add(EquipoRegister(id: item.id));
                             }
 
-                            await postulacionProvider.resgisterPostulacion();
+                            await postulacionProvider
+                                .resgisterPostulacion()
+                                .then((postuDB) {
+                              Future.delayed(const Duration(milliseconds: 1000),
+                                  () {
+                                postualcionesProvider
+                                    .getPostulacionesId()
+                                    .then((resp) {
+                                  cronogramaProvider.registerHito(resp);
+                                });
+                              });
+                            });
                           },
                           style: ButtonStyle(
                             backgroundColor:
@@ -254,5 +312,9 @@ class _PostulacionViewState extends State<PostulacionView> {
         ),
       ],
     );
+  }
+
+  MeetingDataSource _getCalendarDataSource() {
+    return MeetingDataSource(meetings);
   }
 }

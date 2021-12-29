@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:json_annotation/json_annotation.dart';
+
+part 'postulacion_register.g.dart';
+
 class PostualcionRegister {
   PostualcionRegister({
     required this.nombreProyecto,
@@ -41,12 +45,13 @@ class PostualcionRegister {
         "justificacion": justificacion,
         "alcance": alcance,
         "requerimientos": requerimientos,
-        "equipo": List<dynamic>.from(equipo.map((x) => x.toMap())),
+        // "equipo": List<dynamic>.from(equipo.map((x) => x.toMap())),
         "convocatoriaID": convocatoriaId,
         "tipoProyectoId": tipoProyectoId,
       };
 }
 
+@JsonSerializable(explicitToJson: true)
 class EquipoRegister {
   EquipoRegister({
     required this.id,
@@ -61,17 +66,11 @@ class EquipoRegister {
   factory EquipoRegister.fromJson(String str) =>
       EquipoRegister.fromMap(json.decode(str));
 
-  String toJson() => json.encode(toMap());
+  Map<String, dynamic> toJson() => _$EquipoRegisterToJson(this);
 
   factory EquipoRegister.fromMap(Map<String, dynamic> json) => EquipoRegister(
         id: json["id"],
         asignaturaId: json["asignaturaID"] ?? '',
         cargo: json["cargo"] ?? '',
       );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "asignaturaID": asignaturaId,
-        "cargo": cargo,
-      };
 }
